@@ -1,0 +1,29 @@
+import type { ChangeEvent, MouseEvent, Dispatch, SetStateAction } from "react";
+import type { IBoardComment } from "../../../commons/types/generated/types";
+
+export interface ICommentParentProps {
+  id: string;
+  data?: IBoardComment;
+  isEdit: boolean;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface ICommentProps {
+  id: string;
+  rating: number;
+  onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  setRating: Dispatch<SetStateAction<number>>;
+  onClickSubmit: () => void;
+  onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
+  isEdit: boolean;
+  data?: IBoardComment;
+  writer: string;
+  password: string;
+  contents: string;
+}
+
+export interface ReviewContentsSubmitBtnProps {
+  color: boolean;
+}
