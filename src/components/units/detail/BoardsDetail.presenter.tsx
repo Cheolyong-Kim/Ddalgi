@@ -3,7 +3,7 @@ import { getDate } from "../../../../src/commons/libraries/utils";
 import * as S from "./BoardsDetail.styles";
 
 import type { IBoardsDetailProps } from "./BoardsDetail.types";
-import YouTube from "../youtube/Youtube.container";
+import YouTube from "../../commons/youtube/Youtube.container";
 import { Tooltip } from "antd";
 
 const BoardsDetailUI = (props: IBoardsDetailProps): JSX.Element => {
@@ -32,6 +32,7 @@ const BoardsDetailUI = (props: IBoardsDetailProps): JSX.Element => {
               <Tooltip
                 title={
                   props.data?.fetchBoard.boardAddress?.address +
+                  " " +
                   props.data?.fetchBoard.boardAddress?.addressDetail
                 }
               >

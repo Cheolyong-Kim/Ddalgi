@@ -1,6 +1,6 @@
 import * as S from "./Comment.styles";
 
-import Rate from "../Rate/Rate.container";
+import Rate from "../../commons/Rate/Rate.container";
 
 import type { ICommentProps } from "./Comment.types";
 
@@ -8,10 +8,12 @@ const CommentUI = (props: ICommentProps): JSX.Element => {
   return (
     <S.CommentWrap>
       <S.ReviewWrap>
-        <S.ReviewTitleWrap>
-          <S.ReviewTitleImg src="/boards/id/review_title.png" />
-          <S.ReviewTitle>댓글</S.ReviewTitle>
-        </S.ReviewTitleWrap>
+        {props.isEdit ?? (
+          <S.ReviewTitleWrap>
+            <S.ReviewTitleImg src="/boards/id/review_title.png" />
+            <S.ReviewTitle>댓글</S.ReviewTitle>
+          </S.ReviewTitleWrap>
+        )}
         <S.ReviewInfoWrap>
           <S.ReviewInfoInput
             type="text"

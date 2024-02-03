@@ -96,6 +96,7 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
         variables: {
           updateBoardCommentInput: {
             contents,
+            rating,
           },
           password,
           boardCommentId: event.currentTarget.id,
@@ -104,7 +105,7 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
           {
             query: FETCH_BOARD_COMMENT,
             variables: {
-              ID: router.query.id,
+              boardId: router.query.id,
             },
           },
         ],
