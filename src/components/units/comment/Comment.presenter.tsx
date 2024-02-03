@@ -18,15 +18,21 @@ const CommentUI = (props: ICommentProps): JSX.Element => {
           <S.ReviewInfoInput
             type="text"
             placeholder="작성자"
-            onChange={props.onChangeWriter}
-            value={props.writer !== "" ? props.writer : props.data?.writer}
+            id="writer"
+            onChange={props.onChangeInputs}
+            value={
+              props.inputs.writer !== ""
+                ? props.inputs.writer
+                : props.data?.writer
+            }
             disabled={props.isEdit}
           />
           <S.ReviewInfoInput
             type="password"
             placeholder="비밀번호"
-            value={props.password}
-            onChange={props.onChangePassword}
+            id="password"
+            value={props.inputs.password}
+            onChange={props.onChangeInputs}
           />
           <S.ReviewRateWrap>
             <Rate setValue={props.setRating} value={props.rating} />

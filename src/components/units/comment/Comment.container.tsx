@@ -7,7 +7,6 @@ import type { ChangeEvent, MouseEvent } from "react";
 import {
   CREATE_BOARD_COMMENT,
   UPDATE_BOARD_COMMENT,
-  //   DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENT,
 } from "../../../../src/commons/queries";
 import CommentUI from "./Comment.presenter";
@@ -16,13 +15,14 @@ import type { ICommentParentProps } from "./Comment.types";
 import type {
   IMutation,
   IMutationCreateBoardCommentArgs,
-  //   IMutationDeleteBoardCommentArgs,
   IMutationUpdateBoardCommentArgs,
 } from "../../../commons/types/generated/types";
 
 const Comment = (props: ICommentParentProps): JSX.Element => {
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
+  const [inputs, setInputs] = useState({
+    writer: "",
+    password: "",
+  });
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState(0.0);
 
@@ -36,19 +36,13 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
     IMutationUpdateBoardCommentArgs
   >(UPDATE_BOARD_COMMENT);
 
-  //   const [deleteBoardComment] = useMutation<
-  //     Pick<IMutation, "deleteBoardComment">,
-  //     IMutationDeleteBoardCommentArgs
-  //   >(DELETE_BOARD_COMMENT);
-
   const router = useRouter();
 
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
-    setWriter(event.target.value);
-  };
-
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
+  const onChangeInputs = (event: ChangeEvent<HTMLInputElement>): void => {
+    setInputs((prev) => ({
+      ...prev,
+      [event.target.id]: event.target.value,
+    }));
   };
 
   const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>): void => {
@@ -62,8 +56,7 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
       const result = await createBoardComment({
         variables: {
           createBoardCommentInput: {
-            writer,
-            password,
+            ...inputs,
             contents,
             rating,
           },
@@ -83,9 +76,12 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
       if (error instanceof Error) alert(error.message);
     }
 
-    setWriter("");
+    setInputs({
+      writer: "",
+      password: "",
+    });
     setContents("");
-    setPassword("");
+    setRating(0.0);
   };
 
   const onClickUpdate = async (
@@ -98,7 +94,7 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
             contents,
             rating,
           },
-          password,
+          password: inputs.password,
           boardCommentId: event.currentTarget.id,
         },
         refetchQueries: [
@@ -120,18 +116,16 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
 
   return (
     <CommentUI
-      id={props.id}
+      id={props.id ?? ""}
       rating={rating}
-      onChangeWriter={onChangeWriter}
-      onChangePassword={onChangePassword}
+      onChangeInputs={onChangeInputs}
       onChangeContents={onChangeContents}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
       setRating={setRating}
       isEdit={props.isEdit}
       data={props?.data}
-      writer={writer}
-      password={password}
+      inputs={inputs}
       contents={contents}
     />
   );

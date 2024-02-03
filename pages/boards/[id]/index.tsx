@@ -14,7 +14,7 @@ const DetailPage = (): JSX.Element => {
   const router = useRouter();
   if (typeof router.query.id !== "string") return <></>;
 
-  const { data } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENT, {
@@ -27,7 +27,7 @@ const DetailPage = (): JSX.Element => {
     <>
       <BoardsDetail />
       <Comment isEdit={false} />
-      <CommentList data={data} />
+      <CommentList data={data} fetchMore={fetchMore} />
     </>
   );
 };

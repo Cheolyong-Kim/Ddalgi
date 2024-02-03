@@ -108,8 +108,8 @@ export const DELETE_BOARD_COMMENT = gql`
 `;
 
 export const FETCH_BOARD_COMMENT = gql`
-  query fetchBoardComments($boardId: ID!) {
-    fetchBoardComments(boardId: $boardId) {
+  query fetchBoardComments($page: Int, $boardId: ID!) {
+    fetchBoardComments(page: $page, boardId: $boardId) {
       _id
       writer
       contents
