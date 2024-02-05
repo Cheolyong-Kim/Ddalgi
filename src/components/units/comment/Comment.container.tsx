@@ -16,6 +16,7 @@ import type {
   IMutation,
   IMutationCreateBoardCommentArgs,
   IMutationUpdateBoardCommentArgs,
+  IUpdateBoardCommentInput,
 } from "../../../commons/types/generated/types";
 
 const Comment = (props: ICommentParentProps): JSX.Element => {
@@ -87,13 +88,19 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
   const onClickUpdate = async (
     event: MouseEvent<HTMLButtonElement>,
   ): Promise<void> => {
+    if (!contents) {
+      alert("수정할 내용을 입력하세요.");
+      return;
+    }
+
+    const updateBoardCommentInput: IUpdateBoardCommentInput = {};
+    if (contents) updateBoardCommentInput.contents = contents;
+    if (rating) updateBoardCommentInput.rating = rating;
+
     try {
       const result = await updateBoardComment({
         variables: {
-          updateBoardCommentInput: {
-            contents,
-            rating,
-          },
+          updateBoardCommentInput,
           password: inputs.password,
           boardCommentId: event.currentTarget.id,
         },

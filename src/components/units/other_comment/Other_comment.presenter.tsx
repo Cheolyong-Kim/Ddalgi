@@ -12,8 +12,6 @@ import Rate from "../../commons/Rate/Rate.container";
 import { Button, Modal } from "antd";
 
 const OtherCommentUI = (props: IOtherCommentProps): JSX.Element => {
-  console.log(props.data);
-
   return (
     <>
       {props.isEdit ? (

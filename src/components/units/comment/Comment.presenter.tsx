@@ -23,7 +23,7 @@ const CommentUI = (props: ICommentProps): JSX.Element => {
             value={
               props.inputs.writer !== ""
                 ? props.inputs.writer
-                : props.data?.writer
+                : props.data?.writer ?? ""
             }
             disabled={props.isEdit}
           />
@@ -44,7 +44,9 @@ const CommentUI = (props: ICommentProps): JSX.Element => {
             maxLength={100}
             onChange={props.onChangeContents}
             value={
-              props.contents !== "" ? props.contents : props.data?.contents
+              props.contents !== ""
+                ? props.contents
+                : props.data?.contents ?? ""
             }
           ></S.ReviewContents>
           <S.ReviewContentsLimit>0/100</S.ReviewContentsLimit>
