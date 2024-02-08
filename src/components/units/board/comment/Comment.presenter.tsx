@@ -1,6 +1,6 @@
 import * as S from "./Comment.styles";
 
-import Rate from "../../commons/Rate/Rate.container";
+import Rate from "../../../commons/Rate/Rate.container";
 
 import type { ICommentProps } from "./Comment.types";
 

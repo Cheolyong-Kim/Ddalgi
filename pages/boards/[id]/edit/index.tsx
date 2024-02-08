@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 
 import { FETCH_BOARD } from "../../../../src/commons/queries";
-import BoardsNew from "../../../../src/components/units/new/BoardsNew.container";
+import BoardsNew from "../../../../src/components/units/board/new/BoardsNew.container";
 import type {
   IQuery,
   IQueryFetchBoardArgs,

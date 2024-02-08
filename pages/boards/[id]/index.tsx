@@ -6,9 +6,9 @@ import type {
   IQueryFetchBoardCommentsArgs,
 } from "../../../src/commons/types/generated/types";
 
-import BoardsDetail from "../../../src/components/units/detail/BoardsDetail.container";
-import Comment from "../../../src/components/units/comment/Comment.container";
-import CommentList from "../../../src/components/units/comment_list/CommentList.container";
+import BoardsDetail from "../../../src/components/units/board/detail/BoardsDetail.container";
+import Comment from "../../../src/components/units/board/comment/Comment.container";
+import CommentList from "../../../src/components/units/board/comment_list/CommentList.container";
 
 const DetailPage = (): JSX.Element => {
   const router = useRouter();

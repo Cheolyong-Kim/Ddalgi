@@ -7,8 +7,8 @@ import type {
   IQuery,
   IQueryFetchBoardsArgs,
   IQueryFetchBoardsCountArgs,
-} from "../../../commons/types/generated/types";
-import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "../../../commons/queries";
+} from "../../../../commons/types/generated/types";
+import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "../../../../commons/queries";
 
 const Boards = (): JSX.Element => {
   const router = useRouter();

@@ -5,14 +5,14 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 
 import BoardsNewUI from "./BoardsNew.presenter";
-import { CREATE_BOARD, UPDATE_BOARD } from "../../../commons/queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "../../../../commons/queries";
 
 import type { IUpdateBoardInput, IBoardsNewProps } from "./BoardsNew.types";
 import type {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
-} from "../../../commons/types/generated/types";
+} from "../../../../commons/types/generated/types";
 import type { Address } from "react-daum-postcode";
 
 const BoardsNew = (

@@ -1,4 +1,4 @@
-import type { IQuery } from "../../../commons/types/generated/types";
+import type { IQuery } from "../../../../commons/types/generated/types";
 import CommentListUI from "./CommentList.presenter";
 
 import type { ICommentListParentProps } from "./CommentList.types";

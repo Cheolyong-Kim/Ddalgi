@@ -24,7 +24,7 @@ export const NavUl = styled.ul`
   ${flexRow}
   justify-content: space-between;
   align-items: center;
-  width: 25%;
+  width: 40%;
   list-style: none;
 `;
 

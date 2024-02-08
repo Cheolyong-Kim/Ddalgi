@@ -1,8 +1,8 @@
 import * as S from "./Boards.styles";
-import { getDate } from "../../../commons/libraries/utils";
+import { getDate } from "../../../../commons/libraries/utils";
 
 import type { IBoardsProps } from "./Boards.types";
-import Pagination from "../../commons/pagination/pagination.container";
+import Pagination from "../../../commons/pagination/pagination.container";
 
 const BoardsUI = (props: IBoardsProps): JSX.Element => {
   return (

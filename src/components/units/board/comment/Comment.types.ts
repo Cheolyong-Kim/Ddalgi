@@ -1,5 +1,5 @@
 import type { ChangeEvent, MouseEvent, Dispatch, SetStateAction } from "react";
-import type { IBoardComment } from "../../../commons/types/generated/types";
+import type { IBoardComment } from "../../../../commons/types/generated/types";
 
 export interface ICommentParentProps {
   id?: string;

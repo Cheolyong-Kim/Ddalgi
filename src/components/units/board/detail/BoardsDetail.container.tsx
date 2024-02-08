@@ -7,7 +7,7 @@ import {
   DELETE_BOARD,
   LIKE_BOARD,
   DISLIKE_BOARD,
-} from "../../../commons/queries";
+} from "../../../../commons/queries";
 import type {
   IMutation,
   IMutationDeleteBoardArgs,
@@ -15,7 +15,7 @@ import type {
   IMutationLikeBoardArgs,
   IQuery,
   IQueryFetchBoardArgs,
-} from "../../../commons/types/generated/types";
+} from "../../../../commons/types/generated/types";
 
 const BoardsDetail = (): JSX.Element => {
   const router = useRouter();

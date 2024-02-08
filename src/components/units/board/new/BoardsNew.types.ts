@@ -1,5 +1,5 @@
 import type { ChangeEvent } from "react";
-import type { IQuery } from "../../../commons/types/generated/types";
+import type { IQuery } from "../../../../commons/types/generated/types";
 import type { Address } from "react-daum-postcode";
 
 export interface BoardAddressInput {

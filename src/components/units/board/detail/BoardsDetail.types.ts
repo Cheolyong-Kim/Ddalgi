@@ -1,4 +1,4 @@
-import type { IQuery } from "../../../commons/types/generated/types";
+import type { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardsDetailProps {
   data?: Pick<IQuery, "fetchBoard">;

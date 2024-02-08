@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getDate } from "../../../commons/libraries/utils";
+import { getDate } from "../../../../commons/libraries/utils";
 
 import Comment from "../comment/Comment.container";
 import { ReviewRateWrap } from "../comment/Comment.styles";
@@ -8,7 +8,7 @@ import * as S from "./Other_comment.styles";
 
 import type { IOtherCommentProps } from "./Other_comment.types";
 
-import Rate from "../../commons/Rate/Rate.container";
+import Rate from "../../../commons/Rate/Rate.container";
 import { Button, Modal } from "antd";
 
 const OtherCommentUI = (props: IOtherCommentProps): JSX.Element => {

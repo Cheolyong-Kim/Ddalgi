@@ -7,14 +7,14 @@ import type { ChangeEvent, MouseEvent } from "react";
 import {
   DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENT,
-} from "../../../commons/queries";
+} from "../../../../commons/queries";
 import OtherCommentUI from "./Other_comment.presenter";
 
 import type { IOtherCommentParentProps } from "./Other_comment.types";
 import type {
   IMutation,
   IMutationDeleteBoardCommentArgs,
-} from "../../../commons/types/generated/types";
+} from "../../../../commons/types/generated/types";
 
 const OtherComment = (props: IOtherCommentParentProps): JSX.Element => {
   const router = useRouter();

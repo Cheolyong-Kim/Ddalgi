@@ -8,7 +8,7 @@ import {
   CREATE_BOARD_COMMENT,
   UPDATE_BOARD_COMMENT,
   FETCH_BOARD_COMMENT,
-} from "../../../../src/commons/queries";
+} from "../../../../commons/queries";
 import CommentUI from "./Comment.presenter";
 
 import type { ICommentParentProps } from "./Comment.types";
@@ -17,7 +17,7 @@ import type {
   IMutationCreateBoardCommentArgs,
   IMutationUpdateBoardCommentArgs,
   IUpdateBoardCommentInput,
-} from "../../../commons/types/generated/types";
+} from "../../../../commons/types/generated/types";
 
 const Comment = (props: ICommentParentProps): JSX.Element => {
   const [inputs, setInputs] = useState({
