@@ -1,9 +1,12 @@
 import { type ChangeEvent, useState } from "react";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import IntroductionNewUI from "./introductionNew.presenter";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
+import { useRouter } from "next/router";
+import IntroductionNewUI from "./introductionNew.presenter";
 
 const IntroductionNew = (): JSX.Element => {
+  const router = useRouter();
+
   const [personalInfo, setPersonalInfo] = useState({
     age: 0,
     name: "",
@@ -69,7 +72,10 @@ const IntroductionNew = (): JSX.Element => {
       name: personalInfo.name,
       hobby,
       profile,
+      createdAt: new Date().toString(),
     });
+
+    void router.push("/introduction");
   };
 
   return (

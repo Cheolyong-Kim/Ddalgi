@@ -13,6 +13,7 @@
     "@apollo/client": "^3.8.6",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@firebase/firestore-types": "^3.0.0",
     "antd": "^5.10.1",
     "axios": "^1.5.1",
     "firebase": "^10.8.0",
