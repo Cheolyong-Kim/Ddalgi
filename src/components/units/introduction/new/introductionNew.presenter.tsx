@@ -20,6 +20,8 @@ const IntroductionNewUI = (props: IIntroductionNewUIProps): JSX.Element => {
             id="name"
             type="text"
             placeholder="이름을 작성해주세요."
+            defaultValue={props.data?.name}
+            disabled={props.isEdit}
             onChange={props.onChangePersonalInfo}
           />
         </S.IntroductionInputWrap>
@@ -40,11 +42,11 @@ const IntroductionNewUI = (props: IIntroductionNewUIProps): JSX.Element => {
         ></S.IntroductionTextArea>
       </S.IntroductionInputWrap>
       <S.IntroductionSubmitButton
-        onClick={props.onClickSubmit}
-        isButtonAble={props.isButtonAble}
-        disabled={!props.isButtonAble}
+        onClick={props.isEdit ? props.onClickUpdate : props.onClickSubmit}
+        isButtonAble={props.isEdit ? true : props.isButtonAble}
+        disabled={props.isEdit ? false : !props.isButtonAble}
       >
-        등록하기
+        {props.isEdit ? "수정하기" : "등록하기"}
       </S.IntroductionSubmitButton>
     </S.MainWrap>
   );

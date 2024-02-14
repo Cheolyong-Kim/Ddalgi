@@ -1,17 +1,18 @@
 import { type ChangeEvent, useState } from "react";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, updateDoc } from "firebase/firestore";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
 import { useRouter } from "next/router";
 import IntroductionNewUI from "./introductionNew.presenter";
+import type { IIntroductionProps, IDataProps } from "./introductionNew.types";
 
-const IntroductionNew = (): JSX.Element => {
+const IntroductionNew = (props: IIntroductionProps): JSX.Element => {
   const router = useRouter();
 
   const [personalInfo, setPersonalInfo] = useState({
     age: 0,
     name: "",
   });
-  const [hobby, setHobby] = useState([]);
+  const [hobby, setHobby] = useState(["없음"]);
   const [profile, setProfile] = useState("");
   const [isButtonAble, setIsButtonAble] = useState(false);
 
@@ -27,7 +28,7 @@ const IntroductionNew = (): JSX.Element => {
       if (
         event.target.value &&
         personalInfo.name &&
-        hobby.length !== 0 &&
+        !hobby.includes("없음") &&
         profile
       )
         setIsButtonAble(true);
@@ -35,7 +36,7 @@ const IntroductionNew = (): JSX.Element => {
       if (
         personalInfo.age !== 0 &&
         event.target.value &&
-        hobby.length !== 0 &&
+        !hobby.includes("없음") &&
         profile
       )
         setIsButtonAble(true);
@@ -45,10 +46,11 @@ const IntroductionNew = (): JSX.Element => {
   const onChangeHobby = (event: ChangeEvent<HTMLInputElement>): void => {
     const hobbys = event.target.value.split(",");
     setHobby(hobbys);
+
     if (
       personalInfo.age !== 0 &&
       personalInfo.name &&
-      hobbys.length !== 0 &&
+      !hobbys.includes("없음") &&
       profile
     )
       setIsButtonAble(true);
@@ -60,7 +62,7 @@ const IntroductionNew = (): JSX.Element => {
     if (
       personalInfo.age !== 0 &&
       personalInfo.name &&
-      hobby.length !== 0 &&
+      !hobby.includes("없음") &&
       event.target.value
     )
       setIsButtonAble(true);
@@ -78,12 +80,48 @@ const IntroductionNew = (): JSX.Element => {
     void router.push("/introduction");
   };
 
+  const onClickUpdate = async (): Promise<void> => {
+    if (!personalInfo.age) {
+      alert("수정할 내용이 없습니다.");
+      return;
+    }
+
+    if (hobby.includes("없음")) {
+      alert("수정할 내용이 없습니다.");
+      return;
+    }
+
+    if (!profile) {
+      alert("수정할 내용이 없습니다.");
+      return;
+    }
+
+    if (typeof router.query.id !== "string") return;
+    const docId = router.query.id;
+    const introRef = doc(db, "Introduction", docId);
+
+    const newIntroduction: IDataProps = {};
+    if (personalInfo.age) newIntroduction.age = personalInfo.age;
+    if (!hobby.includes("없음")) newIntroduction.hobby = hobby;
+    if (profile) newIntroduction.profile = profile;
+    newIntroduction.createdAt = new Date().toString();
+
+    await updateDoc(introRef, {
+      ...newIntroduction,
+    });
+
+    void router.push("/introduction");
+  };
+
   return (
     <IntroductionNewUI
+      isEdit={props.isEdit}
+      data={props?.data}
       onChangePersonalInfo={onChangePersonalInfo}
       onChangeHobby={onChangeHobby}
       onChangeProfile={onChangeProfile}
       onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
       isButtonAble={isButtonAble}
     />
   );

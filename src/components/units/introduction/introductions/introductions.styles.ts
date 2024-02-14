@@ -19,6 +19,7 @@ export const Table = styled.table`
 `;
 
 export const TableRow = styled.tr`
+  position: relative;
   border-bottom: 1px solid #bdbdbd;
 `;
 
@@ -60,6 +61,28 @@ export const TableHobby = styled.td`
 export const TableProfile = styled.td`
   width: 50%;
   padding: 8px;
+`;
+
+export const ButtonWrap = styled.div`
+  position: absolute;
+  top: 6px;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const UpdateDeleteButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  margin-right: 5px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
 `;
 
 export const CreateButton = styled.button`

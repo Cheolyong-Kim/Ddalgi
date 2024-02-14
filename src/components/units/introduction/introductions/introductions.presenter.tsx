@@ -23,6 +23,14 @@ const IntroductionsUI = (props: IIntroductionsUIProps): JSX.Element => {
               <I.TableAge>{doc.data().age}</I.TableAge>
               <I.TableHobby>{doc.data().hobby.join(",")}</I.TableHobby>
               <I.TableProfile>{doc.data().profile}</I.TableProfile>
+              <I.ButtonWrap>
+                <I.UpdateDeleteButton id={doc.id} onClick={props.onClickUpdate}>
+                  <img src="/boards/id/update_btn.png" />
+                </I.UpdateDeleteButton>
+                <I.UpdateDeleteButton id={doc.id} onClick={props.onClickDelete}>
+                  <img src="/boards/id/delete_btn.png" />
+                </I.UpdateDeleteButton>
+              </I.ButtonWrap>
             </I.TableRow>
           ))}
       </I.Table>
