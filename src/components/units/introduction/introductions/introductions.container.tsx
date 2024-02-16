@@ -12,11 +12,12 @@ import { useRouter } from "next/router";
 import { sortList } from "../../../../commons/libraries/utils";
 import IntroductionsUI from "./introductions.presenter";
 import type { PaginationProps } from "antd";
+import type { DocumentData } from "@firebase/firestore-types";
 
 const Introductions = (): JSX.Element => {
   const router = useRouter();
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<DocumentData[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [dataChange, setDataChange] = useState(false);
 
@@ -43,7 +44,6 @@ const Introductions = (): JSX.Element => {
   const onClickDelete = async (
     event: MouseEvent<HTMLButtonElement>,
   ): Promise<void> => {
-    console.log(event.currentTarget.id);
     await deleteDoc(doc(db, "Introduction", event.currentTarget.id));
 
     setDataChange((prev) => !prev);

@@ -144,17 +144,25 @@ export const AttachImageWrap = styled.div`
 
 export const AttachBtnWrap = styled.div`
   ${flexRow};
-  justify-content: space-between;
-  width: 27%;
+  justify-content: left;
+  width: 70%;
 `;
 
-export const AttachBtn = styled.button`
+export const UploadImg = styled.img`
+  width: 78px;
+  height: 78px;
+  margin-right: 30px;
+`;
+
+export const AttachBtn = styled.img`
   width: 78px;
   height: 78px;
   border: none;
-  background-image: url("/boards/new/uploadbtn.png");
-  background-size: cover;
   cursor: pointer;
+`;
+
+export const AttachInput = styled.input`
+  display: none;
 `;
 
 export const SettingWrap = styled.div`

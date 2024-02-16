@@ -5,6 +5,7 @@ import type {
   HeaderMenuAnchorImgProps,
   LikeNumColorProps,
 } from "./BoardsDetail.types";
+import { flexCol } from "../../../commons/layout/banner/LayoutBanner.styles";
 
 export const reset = css`
   box-sizing: border-box;
@@ -113,9 +114,13 @@ export const ContentsTitle = styled.h1`
   margin-bottom: 40px;
 `;
 
-export const ContentsImg = styled.img`
+export const ContentsImgWrap = styled.div`
+  ${flexCol}
+  align-items: center;
   width: 100%;
-  height: 480px;
+`;
+
+export const ContentsImg = styled.img`
   margin-bottom: 40px;
 `;
 

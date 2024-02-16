@@ -45,6 +45,7 @@ export const FETCH_BOARD = gql`
       likeCount
       dislikeCount
       createdAt
+      images
       boardAddress {
         zipcode
         address
@@ -128,5 +129,13 @@ export const LIKE_BOARD = gql`
 export const DISLIKE_BOARD = gql`
   mutation dislikeBoard($boardId: ID!) {
     dislikeBoard(boardId: $boardId)
+  }
+`;
+
+export const UploadFile = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
+    }
   }
 `;

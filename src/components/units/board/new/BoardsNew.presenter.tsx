@@ -7,7 +7,7 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 import type { IBoardsNewProps } from "./BoardsNew.types";
 
 const BoardsNewUI = (props: IBoardsNewProps): JSX.Element => {
-  console.log(props.data?.fetchBoard);
+  console.log(props.images);
 
   return (
     <S.MainWrap>
@@ -109,9 +109,23 @@ const BoardsNewUI = (props: IBoardsNewProps): JSX.Element => {
       <S.AttachImageWrap>
         <S.InputName>사진 첨부</S.InputName>
         <S.AttachBtnWrap>
-          <S.AttachBtn></S.AttachBtn>
-          <S.AttachBtn></S.AttachBtn>
-          <S.AttachBtn></S.AttachBtn>
+          {props.images.map((el, index) => (
+            <S.UploadImg
+              key={index}
+              src={`https://storage.googleapis.com/${el}`}
+            />
+          ))}
+          <>
+            <S.AttachBtn
+              src="/boards/new/uploadbtn.png"
+              onClick={props.onClickUploadImage}
+            />
+            <S.AttachInput
+              type="file"
+              onChange={props.onChangeImage}
+              ref={props.imageFileRef}
+            />
+          </>
         </S.AttachBtnWrap>
       </S.AttachImageWrap>
       <S.SettingWrap>

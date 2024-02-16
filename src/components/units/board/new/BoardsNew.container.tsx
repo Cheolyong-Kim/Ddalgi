@@ -1,19 +1,25 @@
 import type { ChangeEvent } from "react";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 
 import BoardsNewUI from "./BoardsNew.presenter";
-import { CREATE_BOARD, UPDATE_BOARD } from "../../../../commons/queries";
+import {
+  CREATE_BOARD,
+  UPDATE_BOARD,
+  UploadFile,
+} from "../../../../commons/queries";
 
 import type { IUpdateBoardInput, IBoardsNewProps } from "./BoardsNew.types";
 import type {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
+  IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
 import type { Address } from "react-daum-postcode";
+import { checkValidationFile } from "../../../../commons/libraries/utils";
 
 const BoardsNew = (
   props: Pick<IBoardsNewProps, "data" | "isEdit">,
@@ -23,6 +29,7 @@ const BoardsNew = (
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [images, SetImages] = useState<string[]>([]);
   const [boardAddress, setBoardAddress] = useState({
     zipcode: "",
     address: "",
@@ -37,6 +44,8 @@ const BoardsNew = (
   const [btnDisable, setBtnDisable] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const imageFileRef = useRef<HTMLInputElement>(null);
+
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
     IMutationCreateBoardArgs
@@ -46,6 +55,11 @@ const BoardsNew = (
     Pick<IMutation, "updateBoard">,
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
+
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UploadFile);
 
   const router = useRouter();
 
@@ -138,6 +152,7 @@ const BoardsNew = (
               title,
               contents: content,
               youtubeUrl,
+              images,
               boardAddress,
             },
           },
@@ -186,6 +201,27 @@ const BoardsNew = (
     }
   };
 
+  const onChangeImage = async (
+    event: ChangeEvent<HTMLInputElement>,
+  ): Promise<void> => {
+    const file = event.target.files?.[0];
+
+    const isValid = checkValidationFile(file);
+    if (!isValid) return;
+
+    const result = await uploadFile({
+      variables: {
+        file,
+      },
+    });
+
+    SetImages((prev) => [...prev, result.data?.uploadFile.url ?? ""]);
+  };
+
+  const onClickUploadImage = (): void => {
+    imageFileRef?.current?.click();
+  };
+
   const onToggleModal = (): void => {
     setIsModalOpen((prev) => !prev);
   };
@@ -208,6 +244,8 @@ const BoardsNew = (
       btnDisable={btnDisable}
       zipcode={boardAddress?.zipcode}
       address={boardAddress?.address}
+      images={images}
+      imageFileRef={imageFileRef}
       onChangeName={onChangeName}
       onChangePwd={onChangePwd}
       onChangeTitle={onChangeTitle}
@@ -216,6 +254,8 @@ const BoardsNew = (
       onChangeAddressDetail={onChangeAddressDetail}
       onClickSubmitBtn={onClickSubmitBtn}
       onClickUpdate={onClickUpdate}
+      onChangeImage={onChangeImage}
+      onClickUploadImage={onClickUploadImage}
       onToggleModal={onToggleModal}
       handleComplete={handleComplete}
       isEdit={props.isEdit}

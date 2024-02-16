@@ -1,4 +1,4 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, RefObject } from "react";
 import type { IQuery } from "../../../../commons/types/generated/types";
 import type { Address } from "react-daum-postcode";
 
@@ -23,6 +23,8 @@ export interface IBoardsNewProps {
   btnDisable: boolean;
   zipcode: string;
   address: string;
+  images: string[];
+  imageFileRef: RefObject<HTMLInputElement>;
   onChangeName: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePwd: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -31,6 +33,8 @@ export interface IBoardsNewProps {
   onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickSubmitBtn: () => void;
   onClickUpdate: () => void;
+  onChangeImage: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClickUploadImage: () => void;
   onToggleModal: () => void;
   handleComplete: (data: Address) => void;
   isEdit: boolean;

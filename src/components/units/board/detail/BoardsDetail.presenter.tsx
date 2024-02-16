@@ -7,6 +7,8 @@ import YouTube from "../../../commons/youtube/Youtube.container";
 import { Tooltip } from "antd";
 
 const BoardsDetailUI = (props: IBoardsDetailProps): JSX.Element => {
+  console.log(props.data?.fetchBoard.images);
+
   return (
     <S.MainWrap>
       <Global styles={S.reset} />
@@ -47,11 +49,15 @@ const BoardsDetailUI = (props: IBoardsDetailProps): JSX.Element => {
         <S.PostContentsWrap>
           <S.ContentsWrap>
             <S.ContentsTitle>{props.data?.fetchBoard?.title}</S.ContentsTitle>
-            <S.ContentsImg
-              src="/boards/id/temporary_image.png"
-              alt="임시 이미지"
-            />
             <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
+            <S.ContentsImgWrap>
+              {props.data?.fetchBoard.images?.map((el, index) => (
+                <S.ContentsImg
+                  key={index}
+                  src={`https://storage.googleapis.com/${el}`}
+                />
+              ))}
+            </S.ContentsImgWrap>
           </S.ContentsWrap>
           {props.data?.fetchBoard?.youtubeUrl && (
             <S.YouTubeWrap>

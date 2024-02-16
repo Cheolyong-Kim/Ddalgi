@@ -36,7 +36,7 @@ const IntroductionsUI = (props: IIntroductionsUIProps): JSX.Element => {
       </I.Table>
       <Pagination
         defaultCurrent={1}
-        total={props.data.length}
+        total={props.data?.length}
         pageSize={5}
         onChange={props.onChangePage}
       ></Pagination>
