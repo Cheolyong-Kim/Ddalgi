@@ -7,8 +7,6 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 import type { IBoardsNewProps } from "./BoardsNew.types";
 
 const BoardsNewUI = (props: IBoardsNewProps): JSX.Element => {
-  console.log(props.images);
-
   return (
     <S.MainWrap>
       <Global styles={S.reset} />
@@ -108,25 +106,53 @@ const BoardsNewUI = (props: IBoardsNewProps): JSX.Element => {
       </S.YoutubeInputWrap>
       <S.AttachImageWrap>
         <S.InputName>사진 첨부</S.InputName>
-        <S.AttachBtnWrap>
-          {props.images.map((el, index) => (
-            <S.UploadImg
-              key={index}
-              src={`https://storage.googleapis.com/${el}`}
-            />
-          ))}
-          <>
-            <S.AttachBtn
-              src="/boards/new/uploadbtn.png"
-              onClick={props.onClickUploadImage}
-            />
-            <S.AttachInput
-              type="file"
-              onChange={props.onChangeImage}
-              ref={props.imageFileRef}
-            />
-          </>
-        </S.AttachBtnWrap>
+        <S.AttachBtnsWrap>
+          {props.images.length !== 0 ? (
+            <>
+              {props.images.map((el, index) => (
+                <S.AttachBtnWrap key={index}>
+                  <S.AttachBtn
+                    id={String(index)}
+                    src={`https://storage.googleapis.com/${el}`}
+                    onClick={props.onClickUpdateImage}
+                  />
+                  <S.AttachInput
+                    id={String(index)}
+                    type="file"
+                    onChange={props.onUpdateImage}
+                    ref={(el) => {
+                      if (props.imageFileUpdateRef.current)
+                        props.imageFileUpdateRef.current[index] = el;
+                    }}
+                  />
+                </S.AttachBtnWrap>
+              ))}
+              <S.AttachBtnWrap>
+                <S.AttachBtn
+                  src="/boards/new/uploadbtn.png"
+                  onClick={props.onClickUploadImage}
+                />
+                <S.AttachInput
+                  type="file"
+                  onChange={props.onChangeImage}
+                  ref={props.imageFileRef}
+                />
+              </S.AttachBtnWrap>
+            </>
+          ) : (
+            <S.AttachBtnWrap>
+              <S.AttachBtn
+                src="/boards/new/uploadbtn.png"
+                onClick={props.onClickUploadImage}
+              />
+              <S.AttachInput
+                type="file"
+                onChange={props.onChangeImage}
+                ref={props.imageFileRef}
+              />
+            </S.AttachBtnWrap>
+          )}
+        </S.AttachBtnsWrap>
       </S.AttachImageWrap>
       <S.SettingWrap>
         <S.InputName>메인 설정</S.InputName>

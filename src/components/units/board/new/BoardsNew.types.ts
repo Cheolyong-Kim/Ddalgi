@@ -1,4 +1,4 @@
-import type { ChangeEvent, RefObject } from "react";
+import type { ChangeEvent, MouseEvent, RefObject } from "react";
 import type { IQuery } from "../../../../commons/types/generated/types";
 import type { Address } from "react-daum-postcode";
 
@@ -13,6 +13,7 @@ export interface IUpdateBoardInput {
   contents?: string;
   youtubeUrl?: string;
   boardAddress?: BoardAddressInput;
+  images?: string[];
 }
 
 export interface IBoardsNewProps {
@@ -25,6 +26,7 @@ export interface IBoardsNewProps {
   address: string;
   images: string[];
   imageFileRef: RefObject<HTMLInputElement>;
+  imageFileUpdateRef: RefObject<null[] | HTMLInputElement[]>;
   onChangeName: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePwd: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -34,7 +36,9 @@ export interface IBoardsNewProps {
   onClickSubmitBtn: () => void;
   onClickUpdate: () => void;
   onChangeImage: (event: ChangeEvent<HTMLInputElement>) => void;
+  onUpdateImage: (event: ChangeEvent<HTMLInputElement>) => Promise<void>;
   onClickUploadImage: () => void;
+  onClickUpdateImage: (event: MouseEvent<HTMLImageElement>) => void;
   onToggleModal: () => void;
   handleComplete: (data: Address) => void;
   isEdit: boolean;

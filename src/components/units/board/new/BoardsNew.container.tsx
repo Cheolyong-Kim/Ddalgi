@@ -1,6 +1,6 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, MouseEvent } from "react";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 
@@ -29,7 +29,7 @@ const BoardsNew = (
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [images, SetImages] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>([]);
   const [boardAddress, setBoardAddress] = useState({
     zipcode: "",
     address: "",
@@ -45,6 +45,7 @@ const BoardsNew = (
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const imageFileRef = useRef<HTMLInputElement>(null);
+  const imageFileUpdateRef = useRef<null[] | HTMLInputElement[]>([]);
 
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -62,6 +63,10 @@ const BoardsNew = (
   >(UploadFile);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (props.data?.fetchBoard.images) setImages(props.data.fetchBoard.images);
+  }, [props.data]);
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>): void => {
     setName(event.target.value);
@@ -125,6 +130,49 @@ const BoardsNew = (
     setBoardAddress({ ...boardAddress, addressDetail: event.target.value });
   };
 
+  const onChangeImage = async (
+    event: ChangeEvent<HTMLInputElement>,
+  ): Promise<void> => {
+    const file = event.target.files?.[0];
+
+    const isValid = checkValidationFile(file);
+    if (!isValid) return;
+
+    const result = await uploadFile({
+      variables: {
+        file,
+      },
+    });
+
+    setImages((prev) => [...prev, result.data?.uploadFile.url ?? ""]);
+  };
+
+  const onClickUploadImage = (): void => {
+    imageFileRef?.current?.click();
+  };
+
+  const onClickUpdateImage = (event: MouseEvent<HTMLImageElement>): void => {
+    imageFileUpdateRef?.current[Number(event.currentTarget.id)]?.click();
+  };
+
+  const onUpdateImage = async (
+    event: ChangeEvent<HTMLInputElement>,
+  ): Promise<void> => {
+    const file = event.target.files?.[0];
+    const isValid = checkValidationFile(file);
+    if (!isValid) return;
+
+    const result = await uploadFile({
+      variables: {
+        file,
+      },
+    });
+    const newImages = [...images];
+    newImages[Number(event.target.id)] = result.data?.uploadFile.url ?? "";
+
+    setImages(newImages);
+  };
+
   const onClickSubmitBtn = async (): Promise<void> => {
     if (!name) {
       setNameError("작성자를 입력하세요.");
@@ -181,6 +229,7 @@ const BoardsNew = (
     if (content) updateBoardInput.contents = content;
     if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
     if (boardAddress) updateBoardInput.boardAddress = boardAddress;
+    if (images.length !== 0) updateBoardInput.images = images;
 
     try {
       if (typeof router.query.id !== "string") {
@@ -199,27 +248,6 @@ const BoardsNew = (
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
-  };
-
-  const onChangeImage = async (
-    event: ChangeEvent<HTMLInputElement>,
-  ): Promise<void> => {
-    const file = event.target.files?.[0];
-
-    const isValid = checkValidationFile(file);
-    if (!isValid) return;
-
-    const result = await uploadFile({
-      variables: {
-        file,
-      },
-    });
-
-    SetImages((prev) => [...prev, result.data?.uploadFile.url ?? ""]);
-  };
-
-  const onClickUploadImage = (): void => {
-    imageFileRef?.current?.click();
   };
 
   const onToggleModal = (): void => {
@@ -246,6 +274,7 @@ const BoardsNew = (
       address={boardAddress?.address}
       images={images}
       imageFileRef={imageFileRef}
+      imageFileUpdateRef={imageFileUpdateRef}
       onChangeName={onChangeName}
       onChangePwd={onChangePwd}
       onChangeTitle={onChangeTitle}
@@ -255,7 +284,9 @@ const BoardsNew = (
       onClickSubmitBtn={onClickSubmitBtn}
       onClickUpdate={onClickUpdate}
       onChangeImage={onChangeImage}
+      onUpdateImage={onUpdateImage}
       onClickUploadImage={onClickUploadImage}
+      onClickUpdateImage={onClickUpdateImage}
       onToggleModal={onToggleModal}
       handleComplete={handleComplete}
       isEdit={props.isEdit}

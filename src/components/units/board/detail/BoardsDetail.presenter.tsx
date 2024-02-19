@@ -7,8 +7,6 @@ import YouTube from "../../../commons/youtube/Youtube.container";
 import { Tooltip } from "antd";
 
 const BoardsDetailUI = (props: IBoardsDetailProps): JSX.Element => {
-  console.log(props.data?.fetchBoard.images);
-
   return (
     <S.MainWrap>
       <Global styles={S.reset} />
