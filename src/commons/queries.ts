@@ -56,8 +56,18 @@ export const FETCH_BOARD = gql`
 `;
 
 export const FETCH_BOARDS = gql`
-  query fetchBoard($page: Int) {
-    fetchBoards(page: $page) {
+  query fetchBoard(
+    $page: Int
+    $search: String
+    $startDate: DateTime
+    $endDate: DateTime
+  ) {
+    fetchBoards(
+      page: $page
+      search: $search
+      startDate: $startDate
+      endDate: $endDate
+    ) {
       _id
       writer
       title
