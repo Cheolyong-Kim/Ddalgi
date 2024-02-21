@@ -1,15 +1,18 @@
-import type { Dispatch, MouseEvent, SetStateAction } from "react";
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
   IQueryFetchBoardsCountArgs,
-} from "../../../../commons/types/generated/types";
+} from "../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
 
-export interface IBoardsProps {
-  data?: Pick<IQuery, "fetchBoards">;
-  onClickCreateBoard: () => void;
-  onClickMoveDetail: (event: MouseEvent<HTMLAnchorElement>) => void;
+export interface ISearchInputProps {
+  search?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface ISearchBarProps {
   refetch: (
     variables?: Partial<IQueryFetchBoardsArgs> | undefined,
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
@@ -18,7 +21,10 @@ export interface IBoardsProps {
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoardsCount">>>;
   setKeyword: Dispatch<SetStateAction<string>>;
   setIsSearchWord: Dispatch<SetStateAction<boolean>>;
-  keyword: string;
-  isSearchWord: boolean;
-  lastPage: number;
+}
+
+export interface ISearchBarUIProps {
+  onChangeSearchWordInput: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeSearchDateInput: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClickSearchButton: () => void;
 }

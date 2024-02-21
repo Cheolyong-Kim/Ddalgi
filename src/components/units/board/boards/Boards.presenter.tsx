@@ -4,25 +4,17 @@ import { v4 as uuidv4 } from "uuid";
 
 import type { IBoardsProps } from "./Boards.types";
 import Pagination from "../../../commons/pagination/pagination.container";
+import SearchBar from "../../../commons/searchbar/searchbar.container";
 
 const BoardsUI = (props: IBoardsProps): JSX.Element => {
   return (
     <S.BoardsWrap>
-      <S.SearchWrap>
-        <S.SearchTitleInput
-          type="text"
-          placeholder="제목을 검색해주세요."
-          onChange={props.onChangeSearchWordInput}
-        />
-        <S.SearchDateInput
-          type="text"
-          placeholder="YYYY.MM.DD ~ YYYY.MM.DD"
-          onChange={props.onChangeSearchDateInput}
-        />
-        <S.SearchButton onClick={props.onClickSearchButton}>
-          검색하기
-        </S.SearchButton>
-      </S.SearchWrap>
+      <SearchBar
+        refetch={props.refetch}
+        refetchBoardsCount={props.refetchBoardsCount}
+        setKeyword={props.setKeyword}
+        setIsSearchWord={props.setIsSearchWord}
+      />
       <S.BoardsTable>
         <S.TableRow>
           <S.TableHeaderNum>번호</S.TableHeaderNum>
@@ -38,17 +30,14 @@ const BoardsUI = (props: IBoardsProps): JSX.Element => {
                 {props.isSearchWord ? (
                   <>
                     {el.title
-                      .replaceAll(
-                        props.searchWord,
-                        `@#@#@#${props.searchWord}@#@#@#`,
-                      )
+                      .replaceAll(props.keyword, `@#@#@#${props.keyword}@#@#@#`)
                       .split("@#@#@#")
                       .map((el) => (
                         <span
                           key={uuidv4()}
                           style={{
                             background:
-                              el === props.searchWord ? "#FFD600" : "none",
+                              el === props.keyword ? "#FFD600" : "none",
                           }}
                         >
                           {el}
