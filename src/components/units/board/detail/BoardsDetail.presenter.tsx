@@ -1,53 +1,36 @@
-import { Global } from "@emotion/react";
 import { getDate } from "../../../../commons/libraries/utils";
 import * as S from "./BoardsDetail.styles";
 
 import type { IBoardsDetailProps } from "./BoardsDetail.types";
 import YouTube from "../../../commons/youtube/Youtube.container";
-import { Tooltip } from "antd";
+import TopButton from "../../../commons/top";
 
 const BoardsDetailUI = (props: IBoardsDetailProps): JSX.Element => {
   return (
     <S.MainWrap>
-      <Global styles={S.reset} />
       <S.PostWrap>
         <S.PostHeader>
-          <S.HeaderProfile>
-            <S.ProfileImg href="#"></S.ProfileImg>
+          <S.ContentsTitle>{props.data?.fetchBoard?.title}</S.ContentsTitle>
+          <S.InfoWrap>
             <S.ProfileWrap>
               <S.ProfileName>{props.data?.fetchBoard?.writer}</S.ProfileName>
-              <S.DateCreated>
-                {getDate(props.data?.fetchBoard?.createdAt)}
-              </S.DateCreated>
+              <S.UpdateDeleteWrap>
+                <S.DateCreated>
+                  {getDate(props.data?.fetchBoard?.createdAt)}
+                </S.DateCreated>
+                <S.UpdateDelete onClick={props.onClickUpdate}>
+                  수정
+                </S.UpdateDelete>
+                <S.UpdateDelete onClick={props.onClickDelete}>
+                  삭제
+                </S.UpdateDelete>
+              </S.UpdateDeleteWrap>
             </S.ProfileWrap>
-          </S.HeaderProfile>
-          <S.HeaderMenu>
-            <S.HeaderMenuLi>
-              <S.HeaderMenuAnchor
-                href="#"
-                img_src={"/boards/id/link.png"}
-              ></S.HeaderMenuAnchor>
-            </S.HeaderMenuLi>
-            <S.HeaderMenuLi>
-              <Tooltip
-                title={
-                  props.data?.fetchBoard.boardAddress?.address +
-                  " " +
-                  props.data?.fetchBoard.boardAddress?.addressDetail
-                }
-              >
-                <S.HeaderMenuAnchor
-                  href="#"
-                  img_src={"/boards/id/location.png"}
-                ></S.HeaderMenuAnchor>
-              </Tooltip>
-            </S.HeaderMenuLi>
-          </S.HeaderMenu>
+            <S.ProfileImg href="#"></S.ProfileImg>
+          </S.InfoWrap>
         </S.PostHeader>
         <S.PostContentsWrap>
           <S.ContentsWrap>
-            <S.ContentsTitle>{props.data?.fetchBoard?.title}</S.ContentsTitle>
-            <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
             <S.ContentsImgWrap>
               {props.data?.fetchBoard.images?.map((el, index) => (
                 <S.ContentsImg
@@ -56,6 +39,7 @@ const BoardsDetailUI = (props: IBoardsDetailProps): JSX.Element => {
                 />
               ))}
             </S.ContentsImgWrap>
+            <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
           </S.ContentsWrap>
           {props.data?.fetchBoard?.youtubeUrl && (
             <S.YouTubeWrap>
@@ -64,39 +48,21 @@ const BoardsDetailUI = (props: IBoardsDetailProps): JSX.Element => {
           )}
           <S.LikeBoxWrap>
             <S.LikeBox onClick={props.onClickLike}>
-              <S.LikeImg src="/boards/id/thumb_up.png" />
+              <S.LikeImg src="/boards/id/like.png" />
               <S.LikeNum type={true}>
                 {props.data?.fetchBoard?.likeCount}
               </S.LikeNum>
             </S.LikeBox>
             <S.LikeBox onClick={props.onClickDislike}>
-              <S.LikeImg src="/boards/id/thumb_down.png" />
+              <S.LikeImg src="/boards/id/dislike.png" />
               <S.LikeNum type={false}>
                 {props.data?.fetchBoard?.dislikeCount}
               </S.LikeNum>
             </S.LikeBox>
           </S.LikeBoxWrap>
         </S.PostContentsWrap>
+        <TopButton />
       </S.PostWrap>
-      <S.MenuWrap>
-        <S.Menu>
-          <S.MenuLi>
-            <S.MenuLiAnchor href="#" onClick={props.onClickMove}>
-              목록으로
-            </S.MenuLiAnchor>
-          </S.MenuLi>
-          <S.MenuLi>
-            <S.MenuLiAnchor href="#" onClick={props.onClickUpdate}>
-              수정하기
-            </S.MenuLiAnchor>
-          </S.MenuLi>
-          <S.MenuLi>
-            <S.MenuLiAnchor href="#" onClick={props.onClickDelete}>
-              삭제하기
-            </S.MenuLiAnchor>
-          </S.MenuLi>
-        </S.Menu>
-      </S.MenuWrap>
     </S.MainWrap>
   );
 };

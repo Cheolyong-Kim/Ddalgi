@@ -20,9 +20,11 @@ export const PaginationSpan = styled.span`
   width: 24px;
   height: 24px;
   margin-right: 20px;
+  font-weight: bold;
   text-align: center;
+  line-height: 24px;
   color: ${(props: IPaginationSpanProps) =>
-    props.isActive ? "#FFD600" : "black"};
+    props.isActive ? "#fe7488" : "#404040"};
   cursor: pointer;
 
   &:last-of-type {
@@ -36,7 +38,7 @@ export const PaginationButton = styled.button`
   margin: ${(props) => (props.isLeft ? "0 20px 0 0 " : "0 0 0 20px")};
   border: none;
   background-color: white;
-  background-image: url("./banner/ic_navigate_before-24px.png");
+  background-image: url("./boards/ic_navigate_before-24px.png");
   transform: ${(props: IPaginationButtonProps) =>
     props.isLeft ? "" : "rotate(180deg)"};
   cursor: pointer;

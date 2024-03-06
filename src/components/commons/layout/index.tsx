@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import LayoutBanner from "./banner";
 import LayoutHeader from "./header/LayoutHeader.container";
-import LayoutNav from "./navigation/LayoutNav.container";
+import LayoutFooter from "./footer";
 
 interface ILayoutProps {
   children: JSX.Element;
@@ -18,8 +18,8 @@ const Layout = (props: ILayoutProps): JSX.Element => {
     <>
       <LayoutHeader />
       <LayoutBanner />
-      <LayoutNav />
       <Body>{props.children}</Body>
+      <LayoutFooter></LayoutFooter>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import type { IBasicInputProps } from "./BoardsNew.types";
 
 export const reset = css`
   box-sizing: border-box;
@@ -21,26 +22,14 @@ export const MainWrap = styled.div`
   ${flexCol};
   justify-content: space-between;
   width: 1200px;
-  padding: 60px 80px;
-`;
-
-export const TitleWrap = styled.div`
-  ${flexCol};
-  align-items: center;
-  margin-bottom: 80px;
-`;
-
-export const Title = styled.h1`
-  margin: 0;
-  padding: 0;
-  font-size: 36px;
-  font-weight: 700;
+  padding: 0 0 30px 0;
 `;
 
 export const UserInputWrap = styled.div`
   ${flexRow};
+  width: 20%;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
 `;
 
 export const UserInputFormWrap = styled.div`
@@ -51,20 +40,27 @@ export const InputName = styled.div`
   display: block;
   margin-bottom: 15px;
   font-size: 16px;
-  font-weight: 500;
+  color: #404040;
 `;
 
 export const BasicInput = styled.input`
   width: 100%;
-  height: 52px;
+  height: ${(props: IBasicInputProps) => (props.isNonMember ? "30px" : "50px")};
   padding: 0 0 0 15px;
-  border: 1px solid #bdbdbd;
-  margin-bottom: 5px;
+  border: none;
+  background-color: white;
+  font-size: ${(props: IBasicInputProps) =>
+    props.isNonMember ? "18px" : "25px"};
 
   &::placeholder {
-    font-size: 16px;
-    font-weight: 400;
-    color: #c4c4c4;
+    font-size: ${(props: IBasicInputProps) =>
+      props.isNonMember ? "18px" : "25px"};
+    color: #bbbbbb;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #404040;
   }
 `;
 
@@ -74,68 +70,34 @@ export const ErrorBox = styled.div`
 `;
 
 export const PostTitleWrap = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 15px;
 `;
 
 export const PostContentWrap = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 15px;
 `;
 
 export const ContentInput = styled.textarea`
   width: 100%;
   height: 480px;
   padding: 15px 0 0 15px;
-  border: 1px solid #bdbdbd;
+  border: 1px solid #bbbbbb;
   margin-bottom: 5px;
+  font-size: 20px;
   resize: none;
 
   &::placeholder {
-    font-size: 16px;
+    font-size: 25px;
     color: #c4c4c4;
   }
-`;
 
-export const AddressInputFormWrap = styled.div`
-  ${flexCol};
-  justify-content: space-between;
-  margin-bottom: 40px;
-`;
-
-export const ZipCodeInputWrap = styled.div`
-  ${flexRow};
-  justify-content: space-between;
-  width: 20%;
-  margin-bottom: 15px;
-`;
-
-export const ZipCodeInput = styled.input`
-  width: 35%;
-  height: 52px;
-  padding: 0;
-  border: 1px solid #bdbdbd;
-  text-align: center;
-
-  &::placeholder {
-    text-align: center;
-    font-size: 16px;
-    color: #c4c4c4;
+  &:focus {
+    outline: none;
   }
-`;
-
-export const ZipCodeSearchBtn = styled.button`
-  width: 60%;
-  height: 52px;
-  padding: 0;
-  border: 1px solid black;
-  background-color: black;
-  font-size: 16px;
-  font-weight: 500;
-  color: white;
-  cursor: pointer;
 `;
 
 export const YoutubeInputWrap = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 15px;
 `;
 
 export const AttachImageWrap = styled.div`
@@ -208,21 +170,35 @@ export const SettingCheckBox = styled.input`
 
 export const SubmitBtnWrap = styled.div`
   ${flexRow};
-  justify-content: center;
+  justify-content: right;
+`;
+
+export const CancleBtn = styled.button`
+  width: 80px;
+  height: 50px;
+  margin-right: 20px;
+  padding: 0;
+  border: 1px solid #404040;
+  border-radius: 10px;
+  background: white;
+  font-size: 16px;
+  cursor: pointer;
 `;
 
 export const SubmitBtn = styled.button`
-  width: 179px;
-  height: 52px;
+  width: 80px;
+  height: 50px;
   padding: 0;
   border: none;
-  background: #ffd600;
+  border-radius: 10px;
+  background: #fe7488;
   font-size: 16px;
-  font-weight: 500;
+  color: white;
   cursor: pointer;
 
   &:disabled {
-    background: #bdbdbd;
+    background: #bbbbbb;
+    color: #404040;
     cursor: auto;
   }
 `;

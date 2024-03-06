@@ -1,7 +1,5 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { Carousel } from "antd";
-import type { CarouselButtonProps } from "./LayoutBanner.types";
 
 export const flexRow = css`
   display: flex;
@@ -15,27 +13,30 @@ export const flexCol = css`
 
 export const BannerWrap = styled.div`
   position: relative;
-  height: 400px;
+  height: 357px;
+  padding-top: 60px;
+  margin-bottom: 100px;
 `;
 
-export const Banner = styled(Carousel)`
-  height: 400px;
+export const Banner = styled.img`
+  width: 100%;
+  height: 357px;
 `;
 
-export const CarouselButton = styled.button`
+export const PhraseWrap = styled.div`
   position: absolute;
-  top: calc(50% - 24px);
-  left: ${(props: CarouselButtonProps) => (props.isLeft ? "350px" : "1450px")};
-  width: 48px;
-  height: 48px;
-  border: none;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.6);
-  background-image: url("/banner/ic_navigate_before-24px.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  transform: ${(props: CarouselButtonProps) =>
-    props.isLeft ? "" : "rotate(180deg)"};
-  cursor: pointer;
-  z-index: 1;
+  top: 145px;
+  left: 500px;
+`;
+
+export const Phrase = styled.p`
+  display: block;
+  margin-bottom: 10px;
+  font-size: 30px;
+  color: white;
+`;
+
+export const EmphasisSpan = styled.span`
+  font-size: 33px;
+  font-weight: bold;
 `;

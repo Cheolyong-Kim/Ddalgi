@@ -1,29 +1,19 @@
-import { useRef } from "react";
-import { BannerWrap, Banner, CarouselButton } from "./LayoutBanner.styles";
+import * as B from "./LayoutBanner.styles";
 
 const LayoutBanner = (): JSX.Element => {
-  const ref = useRef();
-
   return (
-    <BannerWrap>
-      <CarouselButton
-        onClick={() => {
-          ref.current?.prev();
-        }}
-        isLeft={true}
-      ></CarouselButton>
-      <Banner ref={ref} autoplay>
-        <img src="/banner/carousel_image_01.png" />
-        <img src="/banner/carousel_image_02.png" />
-        <img src="/banner/carousel_image_03.png" />
-      </Banner>
-      <CarouselButton
-        onClick={() => {
-          ref.current?.next();
-        }}
-        isLeft={false}
-      ></CarouselButton>
-    </BannerWrap>
+    <B.BannerWrap>
+      <B.Banner src="/banner/banner.png" />
+      <B.PhraseWrap>
+        <B.Phrase>
+          <B.EmphasisSpan>딸기</B.EmphasisSpan>처럼
+        </B.Phrase>
+        <B.Phrase>달콤한 중고거래</B.Phrase>
+        <B.Phrase>
+          믿을 수 있는 <B.EmphasisSpan>딸기마켓</B.EmphasisSpan>에서 시작하세요
+        </B.Phrase>
+      </B.PhraseWrap>
+    </B.BannerWrap>
   );
 };
 

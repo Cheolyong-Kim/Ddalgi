@@ -16,12 +16,9 @@ export interface ICommentProps {
   setRating: Dispatch<SetStateAction<number>>;
   onClickSubmit: () => void;
   onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickCancle: () => void;
   isEdit: boolean;
   data?: IBoardComment;
   inputs: { writer: string; password: string };
   contents: string;
-}
-
-export interface ReviewContentsSubmitBtnProps {
-  color: boolean;
 }

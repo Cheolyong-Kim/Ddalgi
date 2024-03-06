@@ -8,7 +8,7 @@ import BoardsNewUI from "./BoardsNew.presenter";
 import {
   CREATE_BOARD,
   UPDATE_BOARD,
-  UploadFile,
+  UPLOADFILE,
 } from "../../../../commons/queries";
 
 import type { IUpdateBoardInput, IBoardsNewProps } from "./BoardsNew.types";
@@ -18,7 +18,6 @@ import type {
   IMutationUpdateBoardArgs,
   IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
-import type { Address } from "react-daum-postcode";
 import { checkValidationFile } from "../../../../commons/libraries/utils";
 
 const BoardsNew = (
@@ -30,11 +29,6 @@ const BoardsNew = (
   const [content, setContent] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [images, setImages] = useState<string[]>([]);
-  const [boardAddress, setBoardAddress] = useState({
-    zipcode: "",
-    address: "",
-    addressDetail: "",
-  });
 
   const [nameError, setNameError] = useState("");
   const [pwdError, setPwdError] = useState("");
@@ -42,7 +36,6 @@ const BoardsNew = (
   const [contentError, setContentError] = useState("");
 
   const [btnDisable, setBtnDisable] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const imageFileRef = useRef<HTMLInputElement>(null);
   const imageFileUpdateRef = useRef<null[] | HTMLInputElement[]>([]);
@@ -60,7 +53,7 @@ const BoardsNew = (
   const [uploadFile] = useMutation<
     Pick<IMutation, "uploadFile">,
     IMutationUploadFileArgs
-  >(UploadFile);
+  >(UPLOADFILE);
 
   const router = useRouter();
 
@@ -124,12 +117,6 @@ const BoardsNew = (
     setYoutubeUrl(event.target.value);
   };
 
-  const onChangeAddressDetail = (
-    event: ChangeEvent<HTMLInputElement>,
-  ): void => {
-    setBoardAddress({ ...boardAddress, addressDetail: event.target.value });
-  };
-
   const onChangeImage = async (
     event: ChangeEvent<HTMLInputElement>,
   ): Promise<void> => {
@@ -173,6 +160,14 @@ const BoardsNew = (
     setImages(newImages);
   };
 
+  const onClickCancleBtn = (): void => {
+    if (props.data === undefined) void router.push("/boards");
+    else {
+      if (typeof router.query.id !== "string") return;
+      void router.push(`/boards/${router.query.id}`);
+    }
+  };
+
   const onClickSubmitBtn = async (): Promise<void> => {
     if (!name) {
       setNameError("작성자를 입력하세요.");
@@ -201,7 +196,6 @@ const BoardsNew = (
               contents: content,
               youtubeUrl,
               images,
-              boardAddress,
             },
           },
         });
@@ -228,7 +222,6 @@ const BoardsNew = (
     if (title) updateBoardInput.title = title;
     if (content) updateBoardInput.contents = content;
     if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
-    if (boardAddress) updateBoardInput.boardAddress = boardAddress;
     if (images.length !== 0) updateBoardInput.images = images;
 
     try {
@@ -250,19 +243,6 @@ const BoardsNew = (
     }
   };
 
-  const onToggleModal = (): void => {
-    setIsModalOpen((prev) => !prev);
-  };
-
-  const handleComplete = (data: Address): void => {
-    setBoardAddress({
-      zipcode: data.zonecode,
-      address: data.address,
-      addressDetail: "",
-    });
-    setIsModalOpen((prev) => !prev);
-  };
-
   return (
     <BoardsNewUI
       nameError={nameError}
@@ -270,8 +250,6 @@ const BoardsNew = (
       titleError={titleError}
       contentError={contentError}
       btnDisable={btnDisable}
-      zipcode={boardAddress?.zipcode}
-      address={boardAddress?.address}
       images={images}
       imageFileRef={imageFileRef}
       imageFileUpdateRef={imageFileUpdateRef}
@@ -280,17 +258,14 @@ const BoardsNew = (
       onChangeTitle={onChangeTitle}
       onChangeContent={onChangeContent}
       onChangeYoutubeUrl={onChangeYoutubeUrl}
-      onChangeAddressDetail={onChangeAddressDetail}
+      onClickCancleBtn={onClickCancleBtn}
       onClickSubmitBtn={onClickSubmitBtn}
       onClickUpdate={onClickUpdate}
       onChangeImage={onChangeImage}
       onUpdateImage={onUpdateImage}
       onClickUploadImage={onClickUploadImage}
       onClickUpdateImage={onClickUpdateImage}
-      onToggleModal={onToggleModal}
-      handleComplete={handleComplete}
       isEdit={props.isEdit}
-      isModalOpen={isModalOpen}
       data={props.data}
     />
   );

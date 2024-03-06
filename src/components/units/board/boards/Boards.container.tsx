@@ -1,6 +1,4 @@
 import { useState, type MouseEvent } from "react";
-
-import BoardsUI from "./Boards.presenter";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import type {
@@ -9,6 +7,7 @@ import type {
   IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
 import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "../../../../commons/queries";
+import BoardsUI from "./Boards.presenter";
 
 const Boards = (): JSX.Element => {
   const [keyword, setKeyword] = useState("");

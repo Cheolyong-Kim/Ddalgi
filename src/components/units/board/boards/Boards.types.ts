@@ -6,7 +6,7 @@ import type {
 } from "../../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
 
-export interface IBoardsProps {
+export interface IBoardsUIProps {
   data?: Pick<IQuery, "fetchBoards">;
   onClickCreateBoard: () => void;
   onClickMoveDetail: (event: MouseEvent<HTMLAnchorElement>) => void;

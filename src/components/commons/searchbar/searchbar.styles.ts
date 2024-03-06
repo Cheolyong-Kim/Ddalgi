@@ -4,48 +4,66 @@ export const SearchBarWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
-  margin-bottom: 40px;
+  align-items: center;
+  width: 65%;
+`;
+
+export const SearchBarInputWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+`;
+
+export const SearchBarIcon = styled.img`
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
 `;
 
 export const SearchTitleInput = styled.input`
-  width: 60%;
-  height: 52px;
-  padding: 14px 16px 14px 45px;
+  width: 100%;
+  height: 40px;
+  padding: 14px 16px 14px 10px;
   border: none;
-  border-radius: 10px;
-  background-color: #f2f2f2;
-  background-image: url("/boards/ic_search-24px.png");
-  background-repeat: no-repeat;
-  background-position: 10px center;
-  font-size: 16px;
+  font-size: 18px;
 
   &::placeholder {
-    color: black;
+    color: #bbbbbb;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #404040;
   }
 `;
 
 export const SearchDateInput = styled.input`
-  width: 20%;
-  height: 52px;
+  width: 25%;
+  height: 40px;
   padding: 14px 16px 14px 16px;
-  border: 1px solid #bdbdbd;
-  font-size: 16px;
+  border: none;
+  font-size: 12px;
 
   &::placeholder {
-    color: #bdbdbd;
+    color: #bbbbbb;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #404040;
   }
 `;
 
 export const SearchButton = styled.button`
-  width: 8%;
-  height: 52px;
-  padding: 14px 16px 14px 16px;
-  border: 1px solid black;
+  width: 7%;
+  height: 35px;
+  border: none;
   border-radius: 10px;
-  background-color: black;
+  background-color: #fe7488;
   font-size: 16px;
   font-weight: 500;
+  text-align: center;
   color: white;
   cursor: pointer;
 `;

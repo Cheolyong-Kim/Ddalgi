@@ -121,6 +121,11 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
     }
   };
 
+  const onClickCancle = (): void => {
+    if (typeof router.query.id !== "string") return;
+    void router.push(`/boards/${router.query.id}`);
+  };
+
   return (
     <CommentUI
       id={props.id ?? ""}
@@ -129,6 +134,7 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
       onChangeContents={onChangeContents}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
+      onClickCancle={onClickCancle}
       setRating={setRating}
       isEdit={props.isEdit}
       data={props?.data}

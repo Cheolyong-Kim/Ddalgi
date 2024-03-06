@@ -1,17 +1,7 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-import type {
-  HeaderMenuAnchorImgProps,
-  LikeNumColorProps,
-} from "./BoardsDetail.types";
-import { flexCol } from "../../../commons/layout/banner/LayoutBanner.styles";
-
-export const reset = css`
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-`;
+import type { LikeNumColorProps } from "./BoardsDetail.types";
 
 const flexRow = css`
   display: flex;
@@ -33,8 +23,9 @@ export const PostWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 60px 80px;
-  box-shadow: 3px 3px 5px rgba(225, 225, 225);
+  margin-bottom: 10px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #bbbbbb;
 `;
 
 export const PostHeader = styled.div`
@@ -42,57 +33,65 @@ export const PostHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px 0;
-  margin-bottom: 90px;
-  border-bottom: 1px solid #bdbdbd;
+  margin-bottom: 30px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #bbbbbb;
 `;
 
 export const HeaderProfile = styled.div`
   ${flexRow};
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
 `;
 
-export const ProfileImg = styled.a`
-  display: block;
-  width: 56px;
-  height: 56px;
-  margin-right: 13px;
-  background-image: url("/boards/id/profile.png");
+export const ContentsTitle = styled.h1`
+  font-size: 35px;
+  font-weight: bold;
+`;
+
+export const InfoWrap = styled.div`
+  ${flexRow}
+  align-items: center;
 `;
 
 export const ProfileWrap = styled.div`
   ${flexColumn};
+  align-items: end;
 `;
 
 export const ProfileName = styled.span`
-  font-size: 24px;
-  font-weight: 500;
+  margin-bottom: 5px;
+  font-size: 20px;
 `;
 
-export const DateCreated = styled.span`
-  font-size: 16px;
-  font-weight: 400;
-  color: #828282;
-`;
-
-export const HeaderMenu = styled.ul`
+export const UpdateDeleteWrap = styled.div`
   ${flexRow};
+  justify-content: space-between;
   align-items: center;
 `;
 
-export const HeaderMenuLi = styled.li`
-  list-style: none;
-
-  &:first-child {
-    margin-right: 20px;
-  }
+export const DateCreated = styled.span`
+  font-size: 14px;
+  color: #bbbbbb;
 `;
 
-export const HeaderMenuAnchor = styled.a`
+export const UpdateDelete = styled.span`
+  margin-left: 7px;
+  padding-left: 7px;
+  border-left: 1px solid #404040;
+  font-size: 14px;
+  color: #404040;
+  cursor: pointer;
+`;
+
+export const ProfileImg = styled.a`
   display: block;
-  width: 32px;
-  height: 32px;
-  background-image: url(${(props: HeaderMenuAnchorImgProps) => props.img_src});
+  width: 65px;
+  height: 65px;
+  margin-left: 10px;
+  background-image: url("/boards/id/profile.png");
+  background-size: cover;
 `;
 
 export const PostContentsWrap = styled.div`
@@ -108,14 +107,8 @@ export const ContentsWrap = styled.div`
   margin-bottom: 120px;
 `;
 
-export const ContentsTitle = styled.h1`
-  font-size: 36px;
-  font-weight: 700;
-  margin-bottom: 40px;
-`;
-
 export const ContentsImgWrap = styled.div`
-  ${flexCol}
+  ${flexColumn}
   align-items: center;
   width: 100%;
 `;
@@ -125,8 +118,8 @@ export const ContentsImg = styled.img`
 `;
 
 export const Contents = styled.span`
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 18px;
+  color: #404040;
 `;
 
 export const YouTubeWrap = styled.div`
@@ -148,40 +141,10 @@ export const LikeBox = styled.div`
 export const LikeImg = styled.img`
   width: 24px;
   height: 24px;
+  margin-bottom: 5px;
 `;
 
 export const LikeNum = styled.span`
   font-size: 18px;
-  font-weight: 400;
-  color: ${(props: LikeNumColorProps) => (props.type ? "#FFD600" : "#828282")};
-`;
-
-export const MenuWrap = styled.div`
-  ${flexColumn};
-  align-items: center;
-  width: 100%;
-  padding-bottom: 100px;
-  margin-top: 100px;
-  border-bottom: 1px solid #bdbdbd;
-`;
-
-export const Menu = styled.ul`
-  ${flexRow};
-  justify-content: space-between;
-  width: 50%;
-`;
-export const MenuLi = styled.li`
-  list-style: none;
-  color: black;
-`;
-
-export const MenuLiAnchor = styled.a`
-  display: block;
-  width: 180px;
-  height: 45px;
-  border: 1px solid #bdbdbd;
-  color: black;
-  text-align: center;
-  line-height: 45px;
-  text-decoration: none;
+  color: ${(props: LikeNumColorProps) => (props.type ? "#fe7488" : "#bbbbbb")};
 `;

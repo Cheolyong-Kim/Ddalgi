@@ -45,10 +45,6 @@ const BoardsDetail = (): JSX.Element => {
     },
   );
 
-  const onClickMove = (): void => {
-    void router.push("/boards");
-  };
-
   const onClickDelete = async (): Promise<void> => {
     if (typeof data?.fetchBoard._id !== "string") return;
 
@@ -118,7 +114,6 @@ const BoardsDetail = (): JSX.Element => {
       data={data}
       onClickDelete={onClickDelete}
       onClickUpdate={onClickUpdate}
-      onClickMove={onClickMove}
       onClickLike={onClickLike}
       onClickDislike={onClickDislike}
     />

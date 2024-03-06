@@ -146,7 +146,7 @@ export const DISLIKE_BOARD = gql`
   }
 `;
 
-export const UploadFile = gql`
+export const UPLOADFILE = gql`
   mutation uploadFile($file: Upload!) {
     uploadFile(file: $file) {
       url

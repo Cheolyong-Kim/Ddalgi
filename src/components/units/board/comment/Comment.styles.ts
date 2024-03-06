@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-import type { ReviewContentsSubmitBtnProps } from "./Comment.types";
-
 const flexRow = css`
   display: flex;
   flex-direction: row;
@@ -16,56 +14,59 @@ const flexColumn = css`
 export const CommentWrap = styled.div`
   ${flexColumn};
   width: 1200px;
-  margin-top: 40px;
+  margin-top: 20px;
 `;
 
 export const ReviewWrap = styled.div`
   ${flexColumn};
   align-items: start;
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 `;
 
 export const ReviewTitleWrap = styled.div`
   ${flexRow};
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 40px;
-`;
-
-export const ReviewTitleImg = styled.img`
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
+  margin-bottom: 20px;
 `;
 
 export const ReviewTitle = styled.span`
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: bold;
+  color: #404040;
+`;
+
+export const ReviewInputWrap = styled.div`
+  width: 100%;
+  padding-top: 5px;
+  border: 1px solid #bbbbbb;
 `;
 
 export const ReviewInfoWrap = styled.div`
   ${flexRow};
   justify-content: space-between;
   align-items: center;
-  width: 43%;
-  margin-bottom: 25px;
+  width: 15%;
 `;
 
 export const ReviewInfoInput = styled.input`
-  width: 180px;
-  height: 52px;
-  padding: 0 0 0 20px;
-  border: 1px solid #bdbdbd;
+  width: calc(100% / 2);
+  height: 35px;
+  margin-left: 20px;
+  padding-left: 5px;
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
   font-size: 16px;
-  font-weight: 500;
-  color: #828282;
-`;
+  color: #404040;
 
-export const ReviewRateWrap = styled.div`
-  ${flexRow};
-  justify-content: space-between;
-  align-items: center;
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #bbbbbb;
+  }
 `;
 
 export const ReviewContentsWrap = styled.div`
@@ -78,33 +79,51 @@ export const ReviewContents = styled.textarea`
   width: 100%;
   height: 161px;
   padding: 20px;
-  border: 1px solid #bdbdbd;
+  border: none;
   font-size: 16px;
   font-weight: 500;
-  color: #bdbdbd;
+  color: #404040;
   resize: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #bbbbbb;
+  }
 `;
 
 export const ReviewContentsLimit = styled.span`
   position: absolute;
-  bottom: 17px;
-  left: 23px;
+  bottom: 15px;
+  left: 20px;
   font-size: 16px;
-  font-weight: 500;
-  color: #bdbdbd;
+  color: #bbbbbb;
 `;
 
 export const ReviewContentsSubmitBtn = styled.button`
   position: absolute;
-  right: 1px;
-  bottom: 1px;
-  width: 91px;
-  height: 52px;
+  right: 0px;
+  bottom: 0px;
+  width: 70px;
+  height: 40px;
   border: none;
-  background: ${(props: ReviewContentsSubmitBtnProps) =>
-    props.color ? "#FFD600" : "black"};
+  background: #fe7488;
   font-size: 16px;
-  font-weight: 500;
   color: white;
+  cursor: pointer;
+`;
+
+export const ReviewContentsCancleBtn = styled.button`
+  position: absolute;
+  right: 70px;
+  bottom: 0;
+  width: 70px;
+  height: 40px;
+  border: 1px solid #bbbbbb;
+  background: white;
+  font-size: 16px;
+  color: #404040;
   cursor: pointer;
 `;

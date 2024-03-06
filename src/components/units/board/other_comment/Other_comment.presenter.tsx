@@ -1,14 +1,8 @@
 import React from "react";
-
 import { getDate } from "../../../../commons/libraries/utils";
-
 import Comment from "../comment/Comment.container";
-import { ReviewRateWrap } from "../comment/Comment.styles";
 import * as S from "./Other_comment.styles";
-
 import type { IOtherCommentProps } from "./Other_comment.types";
-
-import Rate from "../../../commons/Rate/Rate.container";
 import { Button, Modal } from "antd";
 
 const OtherCommentUI = (props: IOtherCommentProps): JSX.Element => {
@@ -26,22 +20,17 @@ const OtherCommentUI = (props: IOtherCommentProps): JSX.Element => {
           <S.OtherComment>
             <S.OtherCommentProfileImg src="/boards/id/profile.png" />
             <S.OtherCommentDetailWrap>
-              <S.OtherCommentDetail>
-                <S.OtherCommentProfile>
-                  <S.OtherCommentProfileName>
-                    {props.data.writer}
-                  </S.OtherCommentProfileName>
-                  <ReviewRateWrap>
-                    <Rate isReadOnly={true} value={props.data.rating} />
-                  </ReviewRateWrap>
-                </S.OtherCommentProfile>
-                <S.OtherCommentContents>
-                  {props.data.contents}
-                </S.OtherCommentContents>
-              </S.OtherCommentDetail>
-              <S.OtherCommentCreated>
-                {getDate(props.data.createdAt)}
-              </S.OtherCommentCreated>
+              <S.OtherCommentProfile>
+                <S.OtherCommentProfileName>
+                  {props.data.writer}
+                </S.OtherCommentProfileName>
+                <S.OtherCommentCreated>
+                  {getDate(props.data.createdAt)}
+                </S.OtherCommentCreated>
+              </S.OtherCommentProfile>
+              <S.OtherCommentContents>
+                {props.data.contents}
+              </S.OtherCommentContents>
             </S.OtherCommentDetailWrap>
           </S.OtherComment>
           <S.OtherCommentRight>
