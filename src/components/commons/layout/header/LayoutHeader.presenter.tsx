@@ -1,5 +1,7 @@
+import { useRecoilState } from "recoil";
 import * as H from "./LayoutHeader.styles";
 import type { ILayoutHeaderUIProps } from "./LayoutHeader.types";
+import { accessTokenState } from "../../../../commons/stores";
 
 const NAVIGATION_MENUS = [
   { name: "자유게시판", page: "/boards" },
@@ -8,6 +10,9 @@ const NAVIGATION_MENUS = [
 ];
 
 const LayoutHeaderUI = (props: ILayoutHeaderUIProps): JSX.Element => {
+  console.log(props.isClicked);
+  const [accessToken] = useRecoilState(accessTokenState);
+
   return (
     <H.Header>
       <H.ContentsWrap>
@@ -37,9 +42,50 @@ const LayoutHeaderUI = (props: ILayoutHeaderUIProps): JSX.Element => {
             </H.NavUl>
           </H.Nav>
         </H.NavWrap>
-        <H.HeaderButtonWrap>
-          <H.HeaderButton onClick={props.onClickLogin}>로그인</H.HeaderButton>
-        </H.HeaderButtonWrap>
+        {accessToken ? (
+          <>
+            <H.HeaderProfileWrap>
+              <H.HeaderProfileImg
+                src="/boards/id/profile.png"
+                onClick={props.onClickProfile}
+              />
+              <H.HeaderProfileNavWrap isClicked={props.isClicked}>
+                <H.HeaderProfileInfoWrap>
+                  <H.HeaderProfileImg
+                    src={
+                      props.data?.fetchUserLoggedIn.picture ??
+                      "/boards/id/profile.png"
+                    }
+                  />
+                  <H.HeaderProfileNickNameWrap>
+                    <H.HeaderProfileNickName>
+                      {props.data?.fetchUserLoggedIn.name}
+                    </H.HeaderProfileNickName>
+                    <H.HeaderProfilePoint>
+                      {props.data?.fetchUserLoggedIn.userPoint?.amount}P
+                    </H.HeaderProfilePoint>
+                  </H.HeaderProfileNickNameWrap>
+                </H.HeaderProfileInfoWrap>
+                <H.HeaderProfileUl>
+                  <H.HeaderProfileLi onClick={props.onClickMypage}>
+                    마이페이지
+                  </H.HeaderProfileLi>
+                  <H.HeaderProfileLi onClick={props.onClickLogout}>
+                    로그아웃
+                  </H.HeaderProfileLi>
+                </H.HeaderProfileUl>
+              </H.HeaderProfileNavWrap>
+            </H.HeaderProfileWrap>
+          </>
+        ) : (
+          <>
+            <H.HeaderButtonWrap>
+              <H.HeaderButton onClick={props.onClickLogin}>
+                로그인
+              </H.HeaderButton>
+            </H.HeaderButtonWrap>
+          </>
+        )}
       </H.ContentsWrap>
     </H.Header>
   );

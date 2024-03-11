@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 
 import type { ChangeEvent, MouseEvent } from "react";
@@ -8,6 +8,7 @@ import {
   CREATE_BOARD_COMMENT,
   UPDATE_BOARD_COMMENT,
   FETCH_BOARD_COMMENT,
+  FETCH_USER_LOGGEDIN,
 } from "../../../../commons/queries";
 import CommentUI from "./Comment.presenter";
 
@@ -16,6 +17,7 @@ import type {
   IMutation,
   IMutationCreateBoardCommentArgs,
   IMutationUpdateBoardCommentArgs,
+  IQuery,
   IUpdateBoardCommentInput,
 } from "../../../../commons/types/generated/types";
 
@@ -26,6 +28,9 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
   });
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState(0.0);
+
+  const { data: userData } =
+    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGEDIN);
 
   const [createBoardComment] = useMutation<
     Pick<IMutation, "createBoardComment">,
@@ -38,6 +43,13 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
   >(UPDATE_BOARD_COMMENT);
 
   const router = useRouter();
+
+  useEffect(() => {
+    setInputs({
+      writer: userData?.fetchUserLoggedIn.name ?? "",
+      password: "",
+    });
+  }, [userData]);
 
   const onChangeInputs = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputs((prev) => ({
@@ -138,6 +150,7 @@ const Comment = (props: ICommentParentProps): JSX.Element => {
       setRating={setRating}
       isEdit={props.isEdit}
       data={props?.data}
+      userData={userData}
       inputs={inputs}
       contents={contents}
     />

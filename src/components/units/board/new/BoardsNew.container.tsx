@@ -1,12 +1,13 @@
 import type { ChangeEvent, MouseEvent } from "react";
 
 import { useEffect, useRef, useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 
 import BoardsNewUI from "./BoardsNew.presenter";
 import {
   CREATE_BOARD,
+  FETCH_USER_LOGGEDIN,
   UPDATE_BOARD,
   UPLOADFILE,
 } from "../../../../commons/queries";
@@ -17,8 +18,11 @@ import type {
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
   IMutationUploadFileArgs,
+  IQuery,
 } from "../../../../commons/types/generated/types";
 import { checkValidationFile } from "../../../../commons/libraries/utils";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../commons/stores";
 
 const BoardsNew = (
   props: Pick<IBoardsNewProps, "data" | "isEdit">,
@@ -29,16 +33,19 @@ const BoardsNew = (
   const [content, setContent] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [images, setImages] = useState<string[]>([]);
-
   const [nameError, setNameError] = useState("");
   const [pwdError, setPwdError] = useState("");
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
-
   const [btnDisable, setBtnDisable] = useState(true);
+
+  const [accessToken] = useRecoilState(accessTokenState);
 
   const imageFileRef = useRef<HTMLInputElement>(null);
   const imageFileUpdateRef = useRef<null[] | HTMLInputElement[]>([]);
+
+  const { data: userData } =
+    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGEDIN);
 
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -56,6 +63,10 @@ const BoardsNew = (
   >(UPLOADFILE);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (accessToken) setName(userData?.fetchUserLoggedIn.name ?? "");
+  }, [userData]);
 
   useEffect(() => {
     if (props.data?.fetchBoard.images) setImages(props.data.fetchBoard.images);
@@ -190,7 +201,7 @@ const BoardsNew = (
         const result = await createBoard({
           variables: {
             createBoardInput: {
-              writer: name,
+              writer: accessToken ? userData?.fetchUserLoggedIn.name : name,
               password: pwd,
               title,
               contents: content,
@@ -267,6 +278,7 @@ const BoardsNew = (
       onClickUpdateImage={onClickUpdateImage}
       isEdit={props.isEdit}
       data={props.data}
+      userData={userData}
     />
   );
 };

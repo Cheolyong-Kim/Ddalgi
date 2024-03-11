@@ -23,7 +23,7 @@ const CommentUI = (props: ICommentProps): JSX.Element => {
               value={
                 props.inputs.writer !== ""
                   ? props.inputs.writer
-                  : props.data?.writer ?? ""
+                  : props.data?.writer ?? props.userData?.fetchUserLoggedIn.name
               }
             />
             <S.ReviewInfoInput

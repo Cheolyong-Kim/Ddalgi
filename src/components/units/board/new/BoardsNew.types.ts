@@ -31,6 +31,7 @@ export interface IBoardsNewProps {
   onClickUpdateImage: (event: MouseEvent<HTMLImageElement>) => void;
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
+  userData?: Pick<IQuery, "fetchUserLoggedIn">;
 }
 
 export interface IBasicInputProps {

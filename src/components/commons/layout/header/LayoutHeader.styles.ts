@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import type { IHeaderProfileNavProps } from "./LayoutHeader.types";
 
 export const flexRow = css`
   display: flex;
@@ -69,6 +70,75 @@ export const NavLi = styled.li`
 
 export const NavLink = styled.a`
   cursor: pointer;
+`;
+
+export const HeaderProfileWrap = styled.div`
+  ${flexCol};
+  position: relative;
+`;
+
+export const HeaderProfileImg = styled.img`
+  width: 54px;
+  height: 54px;
+  cursor: pointer;
+`;
+
+export const HeaderProfileNavWrap = styled.div`
+  display: ${(props: IHeaderProfileNavProps) =>
+    props.isClicked ? "block" : "none"};
+  position: absolute;
+  right: 0;
+  bottom: -150px;
+  width: 200px;
+  padding: 10px 0 0 0;
+  border-radius: 10px;
+  background-color: white;
+`;
+
+export const HeaderProfileInfoWrap = styled.div`
+  ${flexRow};
+  align-items: center;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 10px;
+  border-bottom: 1px solid #404040;
+`;
+
+export const HeaderProfileNickNameWrap = styled.div`
+  ${flexCol};
+  margin-left: 5px;
+`;
+
+export const HeaderProfileNickName = styled.span`
+  margin-bottom: 3px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #404040;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export const HeaderProfilePoint = styled.span`
+  font-size: 12px;
+  color: #404040;
+`;
+
+export const HeaderProfileUl = styled.ul`
+  list-style: none;
+`;
+
+export const HeaderProfileLi = styled.li`
+  padding: 0 0 10px 20px;
+  border-bottom: 1px solid #ebebeb;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #bbbbbb;
+  cursor: pointer;
+
+  &:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
 `;
 
 export const HeaderButtonWrap = styled.div`

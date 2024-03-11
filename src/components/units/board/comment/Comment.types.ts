@@ -1,5 +1,8 @@
 import type { ChangeEvent, MouseEvent, Dispatch, SetStateAction } from "react";
-import type { IBoardComment } from "../../../../commons/types/generated/types";
+import type {
+  IBoardComment,
+  IQuery,
+} from "../../../../commons/types/generated/types";
 
 export interface ICommentParentProps {
   id?: string;
@@ -19,6 +22,7 @@ export interface ICommentProps {
   onClickCancle: () => void;
   isEdit: boolean;
   data?: IBoardComment;
+  userData?: Pick<IQuery, "fetchUserLoggedIn">;
   inputs: { writer: string; password: string };
   contents: string;
 }

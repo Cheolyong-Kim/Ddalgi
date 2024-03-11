@@ -1,7 +1,12 @@
+import { useRecoilState } from "recoil";
 import * as S from "./BoardsNew.styles";
 import type { IBoardsNewProps } from "./BoardsNew.types";
+import { accessTokenState } from "../../../../commons/stores";
+import * as _ from "lodash";
 
 const BoardsNewUI = (props: IBoardsNewProps): JSX.Element => {
+  const [accessToken] = useRecoilState(accessTokenState);
+
   return (
     <S.MainWrap>
       <S.UserInputWrap>
@@ -10,8 +15,12 @@ const BoardsNewUI = (props: IBoardsNewProps): JSX.Element => {
             type="text"
             placeholder="작성자"
             onChange={props.onChangeName}
-            defaultValue={props.data?.fetchBoard.writer ?? ""}
-            disabled={props.isEdit}
+            defaultValue={
+              accessToken
+                ? props.userData?.fetchUserLoggedIn.name ?? ""
+                : props.data?.fetchBoard.writer ?? ""
+            }
+            disabled={props.isEdit || !_.isEmpty(accessToken)}
             isNonMember={true}
           ></S.BasicInput>
           <S.ErrorBox>{props.nameError}</S.ErrorBox>
