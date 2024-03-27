@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import type { ILoginButtonProps } from "./Login.types";
 
-export const MainWarp = styled.div`
+export const MainForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -9,7 +9,7 @@ export const MainWarp = styled.div`
   margin-bottom: 20px;
 `;
 
-export const LoginTitle = styled.h1`
+export const Title = styled.h1`
   display: inline-block;
   margin-bottom: 30px;
   font-size: 30px;
@@ -24,7 +24,7 @@ export const InputWrap = styled.div`
   padding: 0 0 0 50px;
 `;
 
-export const LoginInput = styled.input`
+export const Input = styled.input`
   width: 60%;
   height: 30px;
   margin-bottom: 5px;
@@ -44,7 +44,7 @@ export const LoginInput = styled.input`
   }
 `;
 
-export const ErrorSpan = styled.span`
+export const ErrorBox = styled.span`
   margin-bottom: 20px;
   padding-left: 10px;
   font-size: 14px;
@@ -59,7 +59,7 @@ export const ButtonWrap = styled.div`
   margin-top: 20px;
 `;
 
-export const LoginButton = styled.button`
+export const Button = styled.button`
   width: 100px;
   height: 40px;
   margin-left: 15px;

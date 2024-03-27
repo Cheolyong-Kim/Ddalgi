@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const MainWarp = styled.div`
+export const MainForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -8,7 +8,7 @@ export const MainWarp = styled.div`
   margin-bottom: 20px;
 `;
 
-export const JoinTitle = styled.h1`
+export const Title = styled.h1`
   display: inline-block;
   margin-bottom: 30px;
   font-size: 30px;
@@ -23,7 +23,7 @@ export const InputWrap = styled.div`
   padding: 0 0 0 50px;
 `;
 
-export const JoinInput = styled.input`
+export const Input = styled.input`
   width: 60%;
   height: 30px;
   margin-bottom: 3px;
@@ -43,7 +43,7 @@ export const JoinInput = styled.input`
   }
 `;
 
-export const JoinInputError = styled.span`
+export const ErrorBox = styled.span`
   padding-left: 10px;
   font-size: 14px;
   color: red;
@@ -58,7 +58,7 @@ export const ButtonWrap = styled.div`
   margin-top: 20px;
 `;
 
-export const JoinButton = styled.button`
+export const Button = styled.button`
   width: 100px;
   height: 40px;
   margin-left: 15px;

@@ -2,12 +2,6 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import type { IBasicInputProps } from "./BoardsNew.types";
 
-export const reset = css`
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-`;
-
 const flexRow = css`
   display: flex;
   flex-direction: row;
@@ -65,6 +59,7 @@ export const BasicInput = styled.input`
 `;
 
 export const ErrorBox = styled.div`
+  padding-left: 15px;
   font-size: 14px;
   color: red;
 `;

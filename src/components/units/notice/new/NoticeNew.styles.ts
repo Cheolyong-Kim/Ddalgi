@@ -11,7 +11,7 @@ const flexCol = css`
   flex-direction: column;
 `;
 
-export const MainWrap = styled.div`
+export const MainWrap = styled.form`
   ${flexCol};
   justify-content: space-between;
   width: 1200px;
@@ -35,6 +35,12 @@ export const BasicInput = styled.input`
     outline: none;
     border-bottom: 1px solid #404040;
   }
+`;
+
+export const ErrorBox = styled.div`
+  padding-left: 15px;
+  font-size: 14px;
+  color: red;
 `;
 
 export const PostTitleWrap = styled.div`
@@ -62,43 +68,6 @@ export const ContentInput = styled.textarea`
   &:focus {
     outline: none;
   }
-`;
-
-export const AttachImageWrap = styled.div`
-  margin-bottom: 40px;
-`;
-
-export const AttachBtnsWrap = styled.div`
-  ${flexRow};
-  justify-content: left;
-  width: 70%;
-`;
-
-export const AttachBtnWrap = styled.div`
-  margin-right: 15px;
-`;
-
-export const UploadImg = styled.img`
-  position: relative;
-  width: 78px;
-  height: 78px;
-  margin-right: 30px;
-  cursor: pointer;
-
-  &: hover {
-    filter: blur(2px);
-  }
-`;
-
-export const AttachBtn = styled.img`
-  width: 78px;
-  height: 78px;
-  border: none;
-  cursor: pointer;
-`;
-
-export const AttachInput = styled.input`
-  display: none;
 `;
 
 export const SubmitBtnWrap = styled.div`

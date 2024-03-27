@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import type {
   IPaginationButtonProps,
   IPaginationSpanProps,
-} from "./pagination.types";
+} from "./Pagination.types";
 import { css } from "@emotion/react";
 
 const flexRow = css`

@@ -1,4 +1,4 @@
-import * as F from "./footer.styles";
+import * as F from "./LayoutFooter.styles";
 
 const LayoutFooter = (): JSX.Element => {
   return (

@@ -63,7 +63,7 @@ export const ProfileName = styled.span`
   font-size: 20px;
 `;
 
-export const UpdateDeleteWrap = styled.div`
+export const UtilsWrap = styled.div`
   ${flexRow};
   justify-content: space-between;
   align-items: center;
@@ -74,7 +74,7 @@ export const DateCreated = styled.span`
   color: #bbbbbb;
 `;
 
-export const UpdateDelete = styled.span`
+export const Util = styled.span`
   margin-left: 7px;
   padding-left: 7px;
   border-left: 1px solid #404040;

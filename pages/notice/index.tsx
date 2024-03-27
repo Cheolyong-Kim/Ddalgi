@@ -1,4 +1,4 @@
-import Notices from "../../src/components/units/notice/notices/notices.container";
+import Notices from "../../src/components/units/notice/notices/index";
 
 const Notice = (): JSX.Element => {
   return <Notices />;

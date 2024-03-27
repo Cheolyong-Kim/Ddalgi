@@ -1,4 +1,4 @@
-import Join from "../../src/components/units/join/Join.container";
+import Join from "../../src/components/units/join/index";
 
 const JoinPage = (): JSX.Element => {
   return <Join />;

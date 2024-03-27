@@ -1,4 +1,4 @@
-import Login from "../../src/components/units/login/Login.container";
+import Login from "../../src/components/units/login/index";
 
 const LoginPage = (): JSX.Element => {
   return <Login />;

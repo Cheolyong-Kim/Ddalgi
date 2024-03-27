@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import LayoutBanner from "./banner";
-import LayoutHeader from "./header/LayoutHeader.container";
+import LayoutHeader from "./header";
 import LayoutFooter from "./footer";
 
 interface ILayoutProps {

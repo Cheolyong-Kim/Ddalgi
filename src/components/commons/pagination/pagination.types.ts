@@ -1,4 +1,3 @@
-import type { MouseEvent } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -10,15 +9,6 @@ export interface IPaginationProps {
   refetch: (
     variables?: Partial<IQueryFetchBoardsArgs> | undefined,
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
-}
-
-export interface IPaginationUIProps {
-  onClickPrev: () => void;
-  onClickNext: () => void;
-  onClickPage: (event: MouseEvent<HTMLSpanElement>) => void;
-  startPage: number;
-  activatedPage: number;
-  lastPage: number;
 }
 
 export interface IPaginationButtonProps {
