@@ -27,5 +27,6 @@ module.exports = {
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/no-unsafe-argument": "off",
     "@typescript-eslint/no-confusing-void-expression": "off",
+    "react/display-name": "off",
   },
 };

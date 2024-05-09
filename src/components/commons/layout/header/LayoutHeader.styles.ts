@@ -22,7 +22,7 @@ export const Header = styled.header`
   width: 100%;
   height: 60px;
   background-color: white;
-  z-index: 1;
+  z-index: 2;
 `;
 
 export const ContentsWrap = styled.div`

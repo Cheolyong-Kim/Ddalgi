@@ -21,7 +21,7 @@ const BoardsNew = (props: IBoardsNewProps): JSX.Element => {
   const [accessToken] = useRecoilState(accessTokenState);
 
   const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(schema),
+    resolver: props.isEdit ? undefined : yupResolver(schema),
     mode: "onSubmit",
   });
   const [images, setImages] = useState<string[]>([]);
@@ -139,7 +139,7 @@ const BoardsNew = (props: IBoardsNewProps): JSX.Element => {
           ></BN.BasicInput>
         </BN.YoutubeInputWrap>
         <UploadImageForm
-          data={props.data}
+          prevImages={props.data?.fetchBoard.images ?? [""]}
           images={images}
           setImages={setImages}
         />

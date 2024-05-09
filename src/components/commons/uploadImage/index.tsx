@@ -11,9 +11,8 @@ export const UploadImageForm = (props: IUploadImagesFormProps): JSX.Element => {
   const imageFileUpdateRef = useRef<null[] | HTMLInputElement[]>([]);
 
   useEffect(() => {
-    if (props.data?.fetchBoard.images)
-      props.setImages(props.data.fetchBoard.images);
-  }, [props.data]);
+    if (props.prevImages) props.setImages(props.prevImages);
+  }, [props.prevImages]);
 
   const onClickUploadImage = (): void => {
     imageFileRef?.current?.click();

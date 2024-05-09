@@ -192,3 +192,213 @@ export const LOGOUT_USER = gql`
     logoutUser
   }
 `;
+
+export const FETCH_USEDITEMS_BEST = gql`
+  query {
+    fetchUseditemsOfTheBest {
+      _id
+      name
+      remarks
+      price
+      pickedCount
+      images
+    }
+  }
+`;
+
+export const FETCH_USEDITEMS = gql`
+  query fetchUseditems($isSoldout: Boolean, $search: String, $page: Int) {
+    fetchUseditems(isSoldout: $isSoldout, search: $search, page: $page) {
+      _id
+      name
+      remarks
+      price
+      pickedCount
+      images
+    }
+  }
+`;
+
+export const CREATE_USEDITEM = gql`
+  mutation createUseditem($createUseditemInput: CreateUseditemInput!) {
+    createUseditem(createUseditemInput: $createUseditemInput) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_USEDITEM = gql`
+  mutation deleteUseditem($useditemId: ID!) {
+    deleteUseditem(useditemId: $useditemId)
+  }
+`;
+
+export const UPDATE_USEDITEM = gql`
+  mutation updateUseditem(
+    $updateUseditemInput: UpdateUseditemInput!
+    $useditemId: ID!
+  ) {
+    updateUseditem(
+      updateUseditemInput: $updateUseditemInput
+      useditemId: $useditemId
+    ) {
+      _id
+    }
+  }
+`;
+
+export const FETCH_USEDITEM = gql`
+  query fetchUseditem($useditemId: ID!) {
+    fetchUseditem(useditemId: $useditemId) {
+      _id
+      name
+      contents
+      remarks
+      price
+      tags
+      images
+      pickedCount
+      useditemAddress {
+        address
+        addressDetail
+      }
+      buyer {
+        _id
+        name
+      }
+      seller {
+        _id
+        name
+        picture
+      }
+      soldAt
+      createdAt
+    }
+  }
+`;
+
+export const TOGGLE_USEDITEM_PICK = gql`
+  mutation toggleUseditemPick($useditemId: ID!) {
+    toggleUseditemPick(useditemId: $useditemId)
+  }
+`;
+
+export const CREATE_USEDITEM_QUESTION = gql`
+  mutation createUseditemQuestion(
+    $createUseditemQuestionInput: CreateUseditemQuestionInput!
+    $useditemId: ID!
+  ) {
+    createUseditemQuestion(
+      createUseditemQuestionInput: $createUseditemQuestionInput
+      useditemId: $useditemId
+    ) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_USEDITEM_QUESTION = gql`
+  mutation deleteUseditemQuestion($useditemQuestionId: ID!) {
+    deleteUseditemQuestion(useditemQuestionId: $useditemQuestionId)
+  }
+`;
+
+export const UPDATE_USEDITEM_QUESTION = gql`
+  mutation updateUseditemQuestion(
+    $updateUseditemQuestionInput: UpdateUseditemQuestionInput!
+    $useditemQuestionId: ID!
+  ) {
+    updateUseditemQuestion(
+      updateUseditemQuestionInput: $updateUseditemQuestionInput
+      useditemQuestionId: $useditemQuestionId
+    ) {
+      _id
+    }
+  }
+`;
+
+export const FETCH_USEDITEM_QUESTIONS = gql`
+  query fetchUseditemQuestions($page: Int, $useditemId: ID!) {
+    fetchUseditemQuestions(page: $page, useditemId: $useditemId) {
+      _id
+      contents
+      user {
+        _id
+        name
+        picture
+      }
+      createdAt
+    }
+  }
+`;
+
+export const FETCH_USEDITEM_QUESTION_ANSWERS = gql`
+  query fetchUseditemQuestionAnswers($useditemQuestionId: ID!) {
+    fetchUseditemQuestionAnswers(useditemQuestionId: $useditemQuestionId) {
+      _id
+      contents
+      user {
+        _id
+        name
+        picture
+      }
+      createdAt
+    }
+  }
+`;
+
+export const CREATE_USEDITEM_QUESTION_ANSWER = gql`
+  mutation createUseditemQuestionAnswer(
+    $createUseditemQuestionAnswerInput: CreateUseditemQuestionAnswerInput!
+    $useditemQuestionId: ID!
+  ) {
+    createUseditemQuestionAnswer(
+      createUseditemQuestionAnswerInput: $createUseditemQuestionAnswerInput
+      useditemQuestionId: $useditemQuestionId
+    ) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_USEDITEM_QUESTION_ANSWER = gql`
+  mutation deleteUseditemQuestionAnswer($useditemQuestionAnswerId: ID!) {
+    deleteUseditemQuestionAnswer(
+      useditemQuestionAnswerId: $useditemQuestionAnswerId
+    )
+  }
+`;
+
+export const UPDATE_USEDITEM_QUESTION_ANSWER = gql`
+  mutation updateUseditemQuestionAnswer(
+    $updateUseditemQuestionAnswerInput: UpdateUseditemQuestionAnswerInput!
+    $useditemQuestionAnswerId: ID!
+  ) {
+    updateUseditemQuestionAnswer(
+      updateUseditemQuestionAnswerInput: $updateUseditemQuestionAnswerInput
+      useditemQuestionAnswerId: $useditemQuestionAnswerId
+    ) {
+      _id
+    }
+  }
+`;
+
+export const CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING = gql`
+  mutation createPoinTransactionOfBuyingAndSelling($useritemId: ID!) {
+    createPoinTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+      _id
+      name
+      price
+      images
+      useditemAddress {
+        address
+      }
+      buyer {
+        _id
+      }
+      seller {
+        _id
+      }
+    }
+  }
+`;

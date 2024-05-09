@@ -1,4 +1,5 @@
 import {
+  type OperationVariables,
   useMutation,
   type ApolloCache,
   type DefaultContext,
@@ -7,28 +8,49 @@ import {
 import {
   CREATE_BOARD,
   CREATE_BOARD_COMMENT,
+  CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING,
+  CREATE_USEDITEM,
+  CREATE_USEDITEM_QUESTION,
+  CREATE_USEDITEM_QUESTION_ANSWER,
   CREATE_USER,
   DELETE_BOARD,
   DELETE_BOARD_COMMENT,
+  DELETE_USEDITEM,
+  DELETE_USEDITEM_QUESTION,
+  DELETE_USEDITEM_QUESTION_ANSWER,
   DISLIKE_BOARD,
   LIKE_BOARD,
   LOGIN_USER,
+  TOGGLE_USEDITEM_PICK,
   UPDATE_BOARD,
   UPDATE_BOARD_COMMENT,
+  UPDATE_USEDITEM,
+  UPDATE_USEDITEM_QUESTION,
+  UPDATE_USEDITEM_QUESTION_ANSWER,
   UPLOADFILE,
 } from "../queries";
 import type {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationCreateBoardCommentArgs,
+  IMutationCreatePointTransactionOfBuyingAndSellingArgs,
+  IMutationCreateUseditemArgs,
+  IMutationCreateUseditemQuestionAnswerArgs,
+  IMutationCreateUseditemQuestionArgs,
   IMutationCreateUserArgs,
   IMutationDeleteBoardArgs,
   IMutationDeleteBoardCommentArgs,
+  IMutationDeleteUseditemArgs,
+  IMutationDeleteUseditemQuestionAnswerArgs,
+  IMutationDeleteUseditemQuestionArgs,
   IMutationDislikeBoardArgs,
   IMutationLikeBoardArgs,
   IMutationLoginUserArgs,
+  IMutationToggleUseditemPickArgs,
   IMutationUpdateBoardArgs,
   IMutationUpdateBoardCommentArgs,
+  IMutationUpdateUseditemQuestionAnswerArgs,
+  IMutationUpdateUseditemQuestionArgs,
   IMutationUploadFileArgs,
 } from "../types/generated/types";
 
@@ -185,3 +207,155 @@ export const useMutationLoginUser = (): MutationTuple<
 
   return result;
 };
+
+export const useMutationCreateUseditem = (): MutationTuple<
+  Pick<IMutation, "createUseditem">,
+  IMutationCreateUseditemArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "createUseditem">,
+    IMutationCreateUseditemArgs
+  >(CREATE_USEDITEM);
+
+  return result;
+};
+
+export const useMutationDeleteUseditem = (): MutationTuple<
+  Pick<IMutation, "deleteUseditem">,
+  IMutationDeleteUseditemArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "deleteUseditem">,
+    IMutationDeleteUseditemArgs
+  >(DELETE_USEDITEM);
+
+  return result;
+};
+
+export const useMutationUpdateUseditem = (): MutationTuple<
+  any,
+  OperationVariables,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation(UPDATE_USEDITEM);
+
+  return result;
+};
+
+export const useMutationToggleUseditemPick = (): MutationTuple<
+  Pick<IMutation, "toggleUseditemPick">,
+  IMutationToggleUseditemPickArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "toggleUseditemPick">,
+    IMutationToggleUseditemPickArgs
+  >(TOGGLE_USEDITEM_PICK);
+
+  return result;
+};
+
+export const useMutationCreateUseditemQuestion = (): MutationTuple<
+  Pick<IMutation, "createUseditemQuestion">,
+  IMutationCreateUseditemQuestionArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "createUseditemQuestion">,
+    IMutationCreateUseditemQuestionArgs
+  >(CREATE_USEDITEM_QUESTION);
+
+  return result;
+};
+
+export const useMutationDeleteUseditemQuestion = (): MutationTuple<
+  Pick<IMutation, "deleteUseditemQuestion">,
+  IMutationDeleteUseditemQuestionArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "deleteUseditemQuestion">,
+    IMutationDeleteUseditemQuestionArgs
+  >(DELETE_USEDITEM_QUESTION);
+
+  return result;
+};
+
+export const useMutationUpdateUseditemQuestion = (): MutationTuple<
+  Pick<IMutation, "updateUseditemQuestion">,
+  IMutationUpdateUseditemQuestionArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "updateUseditemQuestion">,
+    IMutationUpdateUseditemQuestionArgs
+  >(UPDATE_USEDITEM_QUESTION);
+
+  return result;
+};
+
+export const useMutationCreateUseditemQuestionAnswer = (): MutationTuple<
+  Pick<IMutation, "createUseditemQuestionAnswer">,
+  IMutationCreateUseditemQuestionAnswerArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "createUseditemQuestionAnswer">,
+    IMutationCreateUseditemQuestionAnswerArgs
+  >(CREATE_USEDITEM_QUESTION_ANSWER);
+
+  return result;
+};
+
+export const useMutationDeleteUseditemQuestionAnswer = (): MutationTuple<
+  Pick<IMutation, "deleteUseditemQuestionAnswer">,
+  IMutationDeleteUseditemQuestionAnswerArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "deleteUseditemQuestionAnswer">,
+    IMutationDeleteUseditemQuestionAnswerArgs
+  >(DELETE_USEDITEM_QUESTION_ANSWER);
+
+  return result;
+};
+
+export const useMutationUpdateUseditemQuestionAnswer = (): MutationTuple<
+  Pick<IMutation, "updateUseditemQuestionAnswer">,
+  IMutationUpdateUseditemQuestionAnswerArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "updateUseditemQuestionAnswer">,
+    IMutationUpdateUseditemQuestionAnswerArgs
+  >(UPDATE_USEDITEM_QUESTION_ANSWER);
+
+  return result;
+};
+
+export const useMutationCreatePointTransactionOfBuyingAndSelling =
+  (): MutationTuple<
+    Pick<IMutation, "createPointTransactionOfBuyingAndSelling">,
+    IMutationCreatePointTransactionOfBuyingAndSellingArgs,
+    DefaultContext,
+    ApolloCache<any>
+  > => {
+    const result = useMutation<
+      Pick<IMutation, "createPointTransactionOfBuyingAndSelling">,
+      IMutationCreatePointTransactionOfBuyingAndSellingArgs
+    >(CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING);
+
+    return result;
+  };

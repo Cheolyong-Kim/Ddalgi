@@ -14,6 +14,7 @@ import { FETCH_BOARD_COMMENT } from "../../../../commons/queries";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
 import type { IUpdateBoardCommentInput } from "../../../../commons/types/generated/types";
+import * as _ from "lodash";
 
 const Comment = (props: ICommentProps): JSX.Element => {
   const [accessToken] = useRecoilState(accessTokenState);
@@ -56,9 +57,14 @@ const Comment = (props: ICommentProps): JSX.Element => {
         ],
       });
 
-      setValue("writer", "");
-      setValue("password", "");
-      setValue("contents", "");
+      if (accessToken) {
+        setValue("password", "");
+        setValue("contents", "");
+      } else {
+        setValue("writer", "");
+        setValue("password", "");
+        setValue("contents", "");
+      }
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -113,8 +119,12 @@ const Comment = (props: ICommentProps): JSX.Element => {
             <CN.InfoInput
               type="text"
               placeholder="작성자"
-              defaultValue={props.data?.writer ?? ""}
-              disabled={props.isEdit}
+              defaultValue={
+                accessToken
+                  ? userData?.fetchUserLoggedIn.name ?? ""
+                  : props.data?.writer ?? ""
+              }
+              disabled={props.isEdit || !_.isEmpty(accessToken)}
               {...register("writer")}
             />
             <CN.InfoInput

@@ -29,7 +29,7 @@ const Login = (): JSX.Element => {
       const accessToken = result.data?.loginUser.accessToken;
       setAccessToken(accessToken ?? "");
       localStorage.setItem("accessToken", accessToken ?? "");
-      onClickMoveToPage("/boards")();
+      onClickMoveToPage("/markets")();
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
