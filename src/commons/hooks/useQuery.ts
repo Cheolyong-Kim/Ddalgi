@@ -8,9 +8,20 @@ import {
   FETCH_BOARDS,
   FETCH_BOARDS_COUNT,
   FETCH_BOARD_COMMENT,
+  FETCH_POINT_TRANSACTIONS,
+  FETCH_POINT_TRANSACTIONS_COUNT_OF_BUYING,
+  FETCH_POINT_TRANSACTIONS_COUNT_OF_LOADING,
+  FETCH_POINT_TRANSACTIONS_COUNT_OF_SELLING,
+  FETCH_POINT_TRANSACTIONS_OF_BUYING,
+  FETCH_POINT_TRANSACTIONS_OF_LOADING,
+  FETCH_POINT_TRANSACTIONS_OF_SELLING,
   FETCH_USEDITEM,
   FETCH_USEDITEMS,
   FETCH_USEDITEMS_BEST,
+  FETCH_USEDITEMS_COUNT_I_PICKED,
+  FETCH_USEDITEMS_COUNT_I_SOLD,
+  FETCH_USEDITEMS_I_PICKED,
+  FETCH_USEDITEMS_I_SOLD,
   FETCH_USEDITEM_QUESTIONS,
   FETCH_USEDITEM_QUESTION_ANSWERS,
   FETCH_USER_LOGGEDIN,
@@ -19,8 +30,14 @@ import type {
   IQuery,
   IQueryFetchBoardArgs,
   IQueryFetchBoardCommentsArgs,
+  IQueryFetchPointTransactionsArgs,
+  IQueryFetchPointTransactionsOfBuyingArgs,
+  IQueryFetchPointTransactionsOfLoadingArgs,
+  IQueryFetchPointTransactionsOfSellingArgs,
   IQueryFetchUseditemQuestionAnswersArgs,
   IQueryFetchUseditemQuestionsArgs,
+  IQueryFetchUseditemsIPickedArgs,
+  IQueryFetchUseditemsISoldArgs,
 } from "../types/generated/types";
 
 export const useQueryFetchBoards = (): QueryResult<
@@ -150,6 +167,137 @@ export const useQueryFetchUsedItemQuestions = (
       useditemId,
     },
   });
+
+  return result;
+};
+
+export const useQueryFetchUsedItemsISold = (): QueryResult<
+  Pick<IQuery, "fetchUseditemsISold">,
+  IQueryFetchUseditemsISoldArgs
+> => {
+  const result = useQuery<
+    Pick<IQuery, "fetchUseditemsISold">,
+    IQueryFetchUseditemsISoldArgs
+  >(FETCH_USEDITEMS_I_SOLD);
+
+  return result;
+};
+
+export const useQueryFetchUsedItemsIPicked = (): QueryResult<
+  Pick<IQuery, "fetchUseditemsIPicked">,
+  IQueryFetchUseditemsIPickedArgs
+> => {
+  const result = useQuery<
+    Pick<IQuery, "fetchUseditemsIPicked">,
+    IQueryFetchUseditemsIPickedArgs
+  >(FETCH_USEDITEMS_I_PICKED, {
+    variables: {
+      search: "",
+    },
+  });
+
+  return result;
+};
+
+export const useQueryFetchUsedItemsCountISold = (): QueryResult<
+  Pick<IQuery, "fetchUseditemsCountISold">,
+  OperationVariables
+> => {
+  const result = useQuery<Pick<IQuery, "fetchUseditemsCountISold">>(
+    FETCH_USEDITEMS_COUNT_I_SOLD,
+  );
+
+  return result;
+};
+
+export const useQueryFetchUsedItemsCountIPicked = (): QueryResult<
+  Pick<IQuery, "fetchUseditemsCountIPicked">,
+  OperationVariables
+> => {
+  const result = useQuery<Pick<IQuery, "fetchUseditemsCountIPicked">>(
+    FETCH_USEDITEMS_COUNT_I_PICKED,
+  );
+
+  return result;
+};
+
+export const useQueryFetchPointTransactions = (): QueryResult<
+  Pick<IQuery, "fetchPointTransactions">,
+  IQueryFetchPointTransactionsArgs
+> => {
+  const result = useQuery<
+    Pick<IQuery, "fetchPointTransactions">,
+    IQueryFetchPointTransactionsArgs
+  >(FETCH_POINT_TRANSACTIONS);
+
+  return result;
+};
+
+export const useQueryFetchPointTransactionsOfBuying = (): QueryResult<
+  Pick<IQuery, "fetchPointTransactionsOfBuying">,
+  IQueryFetchPointTransactionsOfBuyingArgs
+> => {
+  const result = useQuery<
+    Pick<IQuery, "fetchPointTransactionsOfBuying">,
+    IQueryFetchPointTransactionsOfBuyingArgs
+  >(FETCH_POINT_TRANSACTIONS_OF_BUYING);
+
+  return result;
+};
+
+export const useQueryFetchPointTransactionsOfSelling = (): QueryResult<
+  Pick<IQuery, "fetchPointTransactionsOfSelling">,
+  IQueryFetchPointTransactionsOfSellingArgs
+> => {
+  const result = useQuery<
+    Pick<IQuery, "fetchPointTransactionsOfSelling">,
+    IQueryFetchPointTransactionsOfSellingArgs
+  >(FETCH_POINT_TRANSACTIONS_OF_SELLING);
+
+  return result;
+};
+
+export const useQueryFetchPointTransactionsOfLoading = (): QueryResult<
+  Pick<IQuery, "fetchPointTransactionsOfLoading">,
+  IQueryFetchPointTransactionsOfLoadingArgs
+> => {
+  const result = useQuery<
+    Pick<IQuery, "fetchPointTransactionsOfLoading">,
+    IQueryFetchPointTransactionsOfLoadingArgs
+  >(FETCH_POINT_TRANSACTIONS_OF_LOADING);
+
+  return result;
+};
+
+export const useQueryFetchPointTransactionsCountOfBuying = (): QueryResult<
+  any,
+  OperationVariables
+> => {
+  const result = useQuery<Pick<IQuery, "fetchPointTransactionsCountOfBuying">>(
+    FETCH_POINT_TRANSACTIONS_COUNT_OF_BUYING,
+  );
+
+  return result;
+};
+
+export const useQueryFetchPointTransactionsCountOfLoading = (): QueryResult<
+  any,
+  OperationVariables
+> => {
+  const result = useQuery<Pick<IQuery, "fetchPointTransactionsCountOfLoading">>(
+    FETCH_POINT_TRANSACTIONS_COUNT_OF_LOADING,
+  );
+
+  return result;
+};
+
+export const useQueryFetchPointTransactionsCountOfSelling = (): QueryResult<
+  any,
+  OperationVariables
+> => {
+  const result = useQuery<Pick<IQuery, "fetchPointTransactionsCountOfSelling">>(
+    FETCH_POINT_TRANSACTIONS_COUNT_OF_SELLING,
+  );
 
   return result;
 };

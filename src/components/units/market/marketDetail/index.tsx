@@ -3,6 +3,7 @@ import { getDate } from "../../../../commons/libraries/utils";
 import DOMPurify from "dompurify";
 import KaKaoMap from "../../../commons/kakaoMap";
 import {
+  useMutationCreatePointTransactionOfBuyingAndSelling,
   useMutationDeleteUseditem,
   useMutationToggleUseditemPick,
 } from "../../../../commons/hooks/useMutation";
@@ -15,15 +16,20 @@ import {
 } from "../../../../commons/hooks/useQuery";
 import Link from "next/link";
 import TopButton from "../../../commons/top";
+import { useState } from "react";
 
 const MarketDetail = (): JSX.Element => {
   const router = useRouter();
   if (typeof router.query.id !== "string") return <></>;
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { data } = useQueryFetchUsedItem(router.query.id);
   const { data: userData } = useQueryFetchUserLoggedIn();
   const [deleteUseditem] = useMutationDeleteUseditem();
   const [toggleUseditemPick] = useMutationToggleUseditemPick();
+  const [createPointTransactionOfBuyingAndSelling] =
+    useMutationCreatePointTransactionOfBuyingAndSelling();
 
   const onClickDeleteButton = async (): Promise<void> => {
     if (typeof router.query.id !== "string") return;
@@ -57,6 +63,20 @@ const MarketDetail = (): JSX.Element => {
         },
       ],
     });
+  };
+
+  const onClickBuyButton = async (): Promise<void> => {
+    try {
+      await createPointTransactionOfBuyingAndSelling({
+        variables: {
+          useritemId: router.query.id ?? "",
+        },
+      });
+
+      void router.push("/mypage/mypoint");
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
   };
 
   return (
@@ -110,13 +130,44 @@ const MarketDetail = (): JSX.Element => {
         </MD.LikeWrap>
         <MD.ButButtonWrap>
           <MD.Price>{data?.fetchUseditem.price?.toLocaleString()}원</MD.Price>
-          <MD.BuyButton type="button">구매하기</MD.BuyButton>
+          <MD.BuyButton type="button" onClick={() => setIsModalOpen(true)}>
+            구매하기
+          </MD.BuyButton>
         </MD.ButButtonWrap>
         <MD.TagWrap>
           <MD.Tag>{data?.fetchUseditem.tags}</MD.Tag>
         </MD.TagWrap>
       </MD.PostWrap>
       <TopButton />
+      {isModalOpen && (
+        <MD.PopUpWrap>
+          <MD.PopUpLayer>
+            <MD.PopUpInfoWrap>
+              <MD.PopUpUsedItemName>
+                {data?.fetchUseditem.name}
+              </MD.PopUpUsedItemName>
+              <MD.PopUpUsedItemPrice>
+                {data?.fetchUseditem.price?.toLocaleString()}원
+              </MD.PopUpUsedItemPrice>
+              <MD.PopUpWarningMessage>
+                구매하실 물건이 맞는지 확인해주세요
+              </MD.PopUpWarningMessage>
+            </MD.PopUpInfoWrap>
+            <MD.PopUpButtonWrap>
+              <MD.PopUpButton
+                isCancle={true}
+                onClick={() => setIsModalOpen(false)}
+              >
+                취소
+              </MD.PopUpButton>
+              <MD.PopUpButton type="button" onClick={onClickBuyButton}>
+                구매
+              </MD.PopUpButton>
+            </MD.PopUpButtonWrap>
+          </MD.PopUpLayer>
+          <MD.Dimed></MD.Dimed>
+        </MD.PopUpWrap>
+      )}
     </MD.MainWrap>
   );
 };

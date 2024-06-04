@@ -25,15 +25,15 @@ const SearchBar = (props: ISearchBarProps): JSX.Element => {
     }
 
     if (_.isEmpty(searchVariables)) {
-      props.setKeyword("");
-      props.setIsSearchWord(false);
+      props.setKeyword?.("");
+      props.setIsSearchWord?.(false);
       void props.refetch({
         search: "",
         startDate: "0000-01-01",
         endDate: "9999-12-31",
         page: 1,
       });
-      void props.refetchBoardsCount({
+      void props.refetchCount({
         search: "",
         startDate: "0000-01-01",
         endDate: "9999-12-31",
@@ -41,10 +41,10 @@ const SearchBar = (props: ISearchBarProps): JSX.Element => {
       return;
     }
 
-    props.setKeyword(data.searchWord);
-    props.setIsSearchWord(true);
+    props.setKeyword?.(data.searchWord);
+    props.setIsSearchWord?.(true);
     void props.refetch({ ...searchVariables, page: 1 });
-    void props.refetchBoardsCount({ ...searchVariables });
+    void props.refetchCount({ ...searchVariables });
   };
 
   return (
@@ -57,11 +57,13 @@ const SearchBar = (props: ISearchBarProps): JSX.Element => {
           {...register("searchWord")}
         />
       </S.SearchBarInputWrap>
-      <S.SearchDateInput
-        type="text"
-        placeholder="YYYY.MM.DD ~ YYYY.MM.DD"
-        {...register("searchDate")}
-      />
+      {props.searchDateOff ?? (
+        <S.SearchDateInput
+          type="text"
+          placeholder="YYYY.MM.DD ~ YYYY.MM.DD"
+          {...register("searchDate")}
+        />
+      )}
       <S.SearchButton type="submit">검색</S.SearchButton>
     </S.SearchBarWrap>
   );

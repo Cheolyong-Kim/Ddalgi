@@ -9,6 +9,7 @@ import {
   CREATE_BOARD,
   CREATE_BOARD_COMMENT,
   CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING,
+  CREATE_POINT_TRANSACTION_OF_LOADING,
   CREATE_USEDITEM,
   CREATE_USEDITEM_QUESTION,
   CREATE_USEDITEM_QUESTION_ANSWER,
@@ -21,12 +22,16 @@ import {
   DISLIKE_BOARD,
   LIKE_BOARD,
   LOGIN_USER,
+  LOGIN_USER_EXAMPLE,
+  LOGOUT_USER,
+  RESET_USER_PASSWORD,
   TOGGLE_USEDITEM_PICK,
   UPDATE_BOARD,
   UPDATE_BOARD_COMMENT,
   UPDATE_USEDITEM,
   UPDATE_USEDITEM_QUESTION,
   UPDATE_USEDITEM_QUESTION_ANSWER,
+  UPDATE_USER,
   UPLOADFILE,
 } from "../queries";
 import type {
@@ -34,6 +39,7 @@ import type {
   IMutationCreateBoardArgs,
   IMutationCreateBoardCommentArgs,
   IMutationCreatePointTransactionOfBuyingAndSellingArgs,
+  IMutationCreatePointTransactionOfLoadingArgs,
   IMutationCreateUseditemArgs,
   IMutationCreateUseditemQuestionAnswerArgs,
   IMutationCreateUseditemQuestionArgs,
@@ -46,11 +52,13 @@ import type {
   IMutationDislikeBoardArgs,
   IMutationLikeBoardArgs,
   IMutationLoginUserArgs,
+  IMutationResetUserPasswordArgs,
   IMutationToggleUseditemPickArgs,
   IMutationUpdateBoardArgs,
   IMutationUpdateBoardCommentArgs,
   IMutationUpdateUseditemQuestionAnswerArgs,
   IMutationUpdateUseditemQuestionArgs,
+  IMutationUpdateUserArgs,
   IMutationUploadFileArgs,
 } from "../types/generated/types";
 
@@ -345,6 +353,20 @@ export const useMutationUpdateUseditemQuestionAnswer = (): MutationTuple<
   return result;
 };
 
+export const useMutationCreatePointTransactionOfLoading = (): MutationTuple<
+  Pick<IMutation, "createPointTransactionOfLoading">,
+  IMutationCreatePointTransactionOfLoadingArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "createPointTransactionOfLoading">,
+    IMutationCreatePointTransactionOfLoadingArgs
+  >(CREATE_POINT_TRANSACTION_OF_LOADING);
+
+  return result;
+};
+
 export const useMutationCreatePointTransactionOfBuyingAndSelling =
   (): MutationTuple<
     Pick<IMutation, "createPointTransactionOfBuyingAndSelling">,
@@ -359,3 +381,42 @@ export const useMutationCreatePointTransactionOfBuyingAndSelling =
 
     return result;
   };
+
+export const useMutationResetUserPassword = (): MutationTuple<
+  Pick<IMutation, "resetUserPassword">,
+  IMutationResetUserPasswordArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "resetUserPassword">,
+    IMutationResetUserPasswordArgs
+  >(RESET_USER_PASSWORD);
+
+  return result;
+};
+
+export const useMutationUpdateUser = (): MutationTuple<
+  Pick<IMutation, "updateUser">,
+  IMutationUpdateUserArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<
+    Pick<IMutation, "updateUser">,
+    IMutationUpdateUserArgs
+  >(UPDATE_USER);
+
+  return result;
+};
+
+export const useMutationLogOutUser = (): MutationTuple<
+  Pick<IMutation, "logoutUser">,
+  OperationVariables,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const result = useMutation<Pick<IMutation, "logoutUser">>(LOGOUT_USER);
+
+  return result;
+};

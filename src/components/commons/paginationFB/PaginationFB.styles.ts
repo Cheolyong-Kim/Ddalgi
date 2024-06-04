@@ -38,7 +38,7 @@ export const PaginationButton = styled.button`
     props.isLeft ? "0 20px 0 0 " : "0 0 0 20px"};
   border: none;
   background-color: white;
-  background-image: url("./boards/ic_navigate_before-24px.png");
+  background-image: url("/boards/ic_navigate_before-24px.png");
   transform: ${(props: IPaginationButtonProps) =>
     props.isLeft ? "" : "rotate(180deg)"};
   cursor: pointer;

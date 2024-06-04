@@ -27,8 +27,11 @@ const Login = (): JSX.Element => {
       });
 
       const accessToken = result.data?.loginUser.accessToken;
-      setAccessToken(accessToken ?? "");
-      localStorage.setItem("accessToken", accessToken ?? "");
+      if (accessToken === undefined) {
+        alert("로그인에 실패했습니다.");
+        return;
+      }
+      setAccessToken(accessToken);
       onClickMoveToPage("/markets")();
     } catch (error) {
       if (error instanceof Error) alert(error.message);

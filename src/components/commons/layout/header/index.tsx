@@ -4,6 +4,9 @@ import { accessTokenState } from "../../../../commons/stores";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import { useQueryFetchUserLoggedIn } from "../../../../commons/hooks/useQuery";
 import { useState } from "react";
+import Link from "next/link";
+import { useMutationLogOutUser } from "../../../../commons/hooks/useMutation";
+import { useRouter } from "next/router";
 
 const NAVIGATION_MENUS = [
   { name: "자유게시판", page: "/boards" },
@@ -16,13 +19,19 @@ const LayoutHeader = (): JSX.Element => {
   const [isClicked, setIsClicked] = useState(false);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  const { data } = useQueryFetchUserLoggedIn();
+  const router = useRouter();
+
+  const { data, client } = useQueryFetchUserLoggedIn();
+  const [logOutUser] = useMutationLogOutUser();
   const { onClickMoveToPage } = useMoveToPage();
 
   const onClickLogout = (): void => {
     setAccessToken("");
-    localStorage.removeItem("accessToken");
+    void client.clearStore();
+    void logOutUser();
     setIsClicked(false);
+
+    void router.push("/login");
   };
 
   return (
@@ -57,7 +66,11 @@ const LayoutHeader = (): JSX.Element => {
           <>
             <H.HeaderProfileWrap>
               <H.HeaderProfileImg
-                src="/boards/id/profile.png"
+                src={
+                  data?.fetchUserLoggedIn.picture
+                    ? `http://storage.googleapis.com/${data.fetchUserLoggedIn.picture}`
+                    : "/boards/id/profile.png"
+                }
                 onClick={() => {
                   setIsClicked((prev) => !prev);
                 }}
@@ -66,8 +79,9 @@ const LayoutHeader = (): JSX.Element => {
                 <H.HeaderProfileInfoWrap>
                   <H.HeaderProfileImg
                     src={
-                      data?.fetchUserLoggedIn.picture ??
-                      "/boards/id/profile.png"
+                      data?.fetchUserLoggedIn.picture
+                        ? `http://storage.googleapis.com/${data.fetchUserLoggedIn.picture}`
+                        : "/boards/id/profile.png"
                     }
                   />
                   <H.HeaderProfileNickNameWrap>
@@ -80,8 +94,14 @@ const LayoutHeader = (): JSX.Element => {
                   </H.HeaderProfileNickNameWrap>
                 </H.HeaderProfileInfoWrap>
                 <H.HeaderProfileUl>
-                  <H.HeaderProfileLi onClick={onClickMoveToPage("/mypage")}>
-                    마이페이지
+                  <H.HeaderProfileLi>
+                    <Link href="/mypage/mymarket">
+                      <H.HeaderProfileLiAnchor
+                        onClick={() => setIsClicked(false)}
+                      >
+                        마이페이지
+                      </H.HeaderProfileLiAnchor>
+                    </Link>
                   </H.HeaderProfileLi>
                   <H.HeaderProfileLi onClick={onClickLogout}>
                     로그아웃

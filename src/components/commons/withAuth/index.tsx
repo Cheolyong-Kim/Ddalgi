@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import getAccessToken from "../../../commons/libraries/getAccessToken";
 
 export const withAuth =
   (Component: any) =>
@@ -7,10 +8,12 @@ export const withAuth =
     const router = useRouter();
 
     useEffect(() => {
-      if (!localStorage.getItem("accessToken")) {
-        alert("로그인이 필요한 페이지입니다.");
-        void router.push("/login");
-      }
+      void getAccessToken().then((newAccessToken) => {
+        if (newAccessToken === undefined) {
+          alert("로그인 후 이용 가능합니다.");
+          void router.push("/login");
+        }
+      });
     }, []);
 
     return <Component {...props} />;

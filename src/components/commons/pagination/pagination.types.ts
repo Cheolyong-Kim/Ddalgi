@@ -8,7 +8,7 @@ export interface IPaginationProps {
   lastPage: number;
   refetch: (
     variables?: Partial<IQueryFetchBoardsArgs> | undefined,
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
+  ) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
 }
 
 export interface IPaginationButtonProps {

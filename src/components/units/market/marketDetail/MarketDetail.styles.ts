@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
+interface IPopUpButtonProps {
+  isCancle?: boolean;
+}
+
 const flexRow = css`
   display: flex;
   flex-direction: row;
@@ -135,6 +139,87 @@ export const LikeImg = styled.img`
 export const LikeNum = styled.span`
   font-size: 18px;
   color: #606060;
+`;
+
+export const PopUpWrap = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+`;
+
+export const PopUpLayer = styled.div`
+  position: absolute;
+  top: calc(50vh - 200px);
+  left: calc(50vw - 200px);
+  width: 350px;
+  height: 350px;
+  margin: auto;
+  border-radius: 10px;
+  background-color: white;
+  z-index: 15;
+`;
+
+export const PopUpInfoWrap = styled.div`
+  position: absolute;
+  top: 80px;
+  left: 25px;
+  ${flexCol};
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+`;
+
+export const PopUpUsedItemName = styled.span`
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export const PopUpUsedItemPrice = styled.span`
+  display: block;
+  margin-bottom: 30px;
+  font-size: 18px;
+`;
+
+export const PopUpWarningMessage = styled.span`
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
+`;
+
+export const PopUpButtonWrap = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+`;
+
+export const PopUpButton = styled.button`
+  width: 50%;
+  height: 40px;
+  border: ${(props: IPopUpButtonProps) =>
+    props.isCancle ? "1px solid #bdbdbd" : "none"};
+  border-radius: ${(props) => (props.isCancle ? "0 0 0 10px" : "0 0 10px 0")};
+  background-color: ${(props) => (props.isCancle ? "white" : "#fe7488")};
+  font-size: 17px;
+  color: ${(props) => (props.isCancle ? "#606060" : "white")};
+  cursor: pointer;
+`;
+
+export const Dimed = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: gray;
+  opacity: 0.5;
 `;
 
 export const TagWrap = styled.div`

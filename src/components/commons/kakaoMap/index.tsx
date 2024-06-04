@@ -54,7 +54,12 @@ const KaKaoMap = (props: IKaKaoMapProps): JSX.Element => {
     };
   }, [props.address]);
 
-  return <div id="map" style={{ width: "600px", height: "400px" }}></div>;
+  return (
+    <div
+      id="map"
+      style={{ width: "600px", height: "400px", zIndex: "0" }}
+    ></div>
+  );
 };
 
 export default KaKaoMap;

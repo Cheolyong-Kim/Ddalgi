@@ -22,7 +22,7 @@ export const Header = styled.header`
   width: 100%;
   height: 60px;
   background-color: white;
-  z-index: 2;
+  z-index: 11;
 `;
 
 export const ContentsWrap = styled.div`
@@ -139,6 +139,10 @@ export const HeaderProfileLi = styled.li`
     margin-bottom: 0;
     border-bottom: none;
   }
+`;
+
+export const HeaderProfileLiAnchor = styled.a`
+  text-decoration: none;
 `;
 
 export const HeaderButtonWrap = styled.div`

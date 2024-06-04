@@ -29,7 +29,7 @@ const Boards = (): JSX.Element => {
         <B.BoardsTitle>자유게시판</B.BoardsTitle>
         <SearchBar
           refetch={refetch}
-          refetchBoardsCount={refetchBoardsCount}
+          refetchCount={refetchBoardsCount}
           setKeyword={setKeyword}
           setIsSearchWord={setIsSearchWord}
         />

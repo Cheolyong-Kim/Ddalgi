@@ -187,12 +187,6 @@ export const FETCH_USER_LOGGEDIN = gql`
   }
 `;
 
-export const LOGOUT_USER = gql`
-  mutation {
-    logoutUser
-  }
-`;
-
 export const FETCH_USEDITEMS_BEST = gql`
   query {
     fetchUseditemsOfTheBest {
@@ -383,9 +377,134 @@ export const UPDATE_USEDITEM_QUESTION_ANSWER = gql`
   }
 `;
 
+export const FETCH_USEDITEMS_I_SOLD = gql`
+  query fetchUseditemsISold($search: String, $page: Int) {
+    fetchUseditemsISold(search: $search, page: $page) {
+      _id
+      name
+      price
+      createdAt
+      soldAt
+    }
+  }
+`;
+
+export const FETCH_USEDITEMS_I_PICKED = gql`
+  query fetchUseditemsIPicked($search: String, $page: Int) {
+    fetchUseditemsIPicked(search: $search, page: $page) {
+      _id
+      name
+      price
+      createdAt
+      deletedAt
+      soldAt
+    }
+  }
+`;
+
+export const FETCH_USEDITEMS_COUNT_I_SOLD = gql`
+  query {
+    fetchUseditemsCountISold
+  }
+`;
+
+export const FETCH_USEDITEMS_COUNT_I_PICKED = gql`
+  query {
+    fetchUseditemsCountIPicked
+  }
+`;
+
+export const FETCH_POINT_TRANSACTIONS = gql`
+  query fetchPointTransactions($search: String, $page: Int) {
+    fetchPointTransactions(search: $search, page: $page) {
+      _id
+      impUid
+      amount
+      balance
+      status
+      statusDetail
+      createdAt
+    }
+  }
+`;
+
+export const FETCH_POINT_TRANSACTIONS_OF_BUYING = gql`
+  query fetchPointTransactionsOfBuying($search: String, $page: Int) {
+    fetchPointTransactionsOfBuying(search: $search, page: $page) {
+      _id
+      amount
+      balance
+      status
+      statusDetail
+      useditem {
+        _id
+        name
+      }
+      createdAt
+    }
+  }
+`;
+
+export const FETCH_POINT_TRANSACTIONS_OF_SELLING = gql`
+  query fetchPointTransactionsOfSelling($search: String, $page: Int) {
+    fetchPointTransactionsOfSelling(search: $search, page: $page) {
+      _id
+      amount
+      balance
+      status
+      statusDetail
+      useditem {
+        _id
+        name
+      }
+      createdAt
+    }
+  }
+`;
+
+export const FETCH_POINT_TRANSACTIONS_OF_LOADING = gql`
+  query fetchPointTransactionsOfLoading($search: String, $page: Int) {
+    fetchPointTransactionsOfLoading(search: $search, page: $page) {
+      _id
+      impUid
+      amount
+      balance
+      status
+      statusDetail
+      createdAt
+    }
+  }
+`;
+
+export const FETCH_POINT_TRANSACTIONS_COUNT_OF_BUYING = gql`
+  query {
+    fetchPointTransactionsCountOfBuying
+  }
+`;
+
+export const FETCH_POINT_TRANSACTIONS_COUNT_OF_LOADING = gql`
+  query {
+    fetchPointTransactionsCountOfLoading
+  }
+`;
+
+export const FETCH_POINT_TRANSACTIONS_COUNT_OF_SELLING = gql`
+  query {
+    fetchPointTransactionsCountOfSelling
+  }
+`;
+
+export const CREATE_POINT_TRANSACTION_OF_LOADING = gql`
+  mutation createPointTransactionOfLoading($impUid: ID!) {
+    createPointTransactionOfLoading(impUid: $impUid) {
+      _id
+    }
+  }
+`;
+
 export const CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING = gql`
-  mutation createPoinTransactionOfBuyingAndSelling($useritemId: ID!) {
-    createPoinTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+  mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
+    createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
       _id
       name
       price
@@ -400,5 +519,25 @@ export const CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING = gql`
         _id
       }
     }
+  }
+`;
+
+export const RESET_USER_PASSWORD = gql`
+  mutation resetUserPassword($password: String!) {
+    resetUserPassword(password: $password)
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation updateUser($updateUserInput: UpdateUserInput!) {
+    updateUser(updateUserInput: $updateUserInput) {
+      _id
+    }
+  }
+`;
+
+export const LOGOUT_USER = gql`
+  mutation {
+    logoutUser
   }
 `;
