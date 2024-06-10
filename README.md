@@ -21,21 +21,21 @@
 <h3>Environment</h3>
 
 <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=
-visualstudiocode&logoColor=white">
+visualstudiocode&logoColor=white"/>
 
 <h3>Development</h3>
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=
-javascript&logoColor=white">
+javascript&logoColor=white"/>
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=
-react&logoColor=white">
+react&logoColor=white"/>
 <img src="https://img.shields.io/badge/nextjs-000000?style=for-the-badge&logo=
-nextjs&logoColor=white">
+nextjs&logoColor=white"/>
 <img src="https://img.shields.io/badge/graphql-E10098?style=for-the-badge&logo=
-ghaphql&logoColor=white">
+ghaphql&logoColor=white"/>
 <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=
-typescript&logoColor=white">
+typescript&logoColor=white"/>
 <img src="https://img.shields.io/badge/styledcomponent-DB7093?style=for-the-badge&logo=
-styledcomponents&logoColor=white">
+styledcomponents&logoColor=white"/>
 
 </br>
 
@@ -311,7 +311,7 @@ styledcomponents&logoColor=white">
 
 </br>
 
-### 참고
+# 참고
 
 개발 과정은 아래 링크에서 확인하실 수 있습니다.</br>
 <a href="https://cheolyong.tistory.com/category/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%94%B8%EA%B8%B0%EB%A7%88%EC%BC%93?page=1">딸기마켓 프로젝트 기록</a>
