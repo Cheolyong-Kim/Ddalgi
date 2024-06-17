@@ -10,7 +10,7 @@ import {
   useMutationLikeBoard,
 } from "../../../../commons/hooks/useMutation";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
-import { FETCH_BOARD } from "../../../../commons/queries";
+import { FETCH_BOARD, FETCH_BOARDS } from "../../../../commons/queries";
 
 const BoardsDetail = (): JSX.Element => {
   const router = useRouter();
@@ -32,6 +32,11 @@ const BoardsDetail = (): JSX.Element => {
         variables: {
           boardId: data?.fetchBoard._id,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARDS,
+          },
+        ],
       });
       alert("게시글이 삭제되었습니다.");
 

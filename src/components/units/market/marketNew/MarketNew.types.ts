@@ -1,3 +1,4 @@
+import type { ApolloClient } from "@apollo/client";
 import type { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IRemarkPriceInputWrapProps {
@@ -7,6 +8,7 @@ export interface IRemarkPriceInputWrapProps {
 export interface IMarketNewProps {
   isEdit: boolean;
   data?: Pick<IQuery, "fetchUseditem"> | undefined;
+  client?: ApolloClient<any>;
 }
 
 export interface IMarketNewData {

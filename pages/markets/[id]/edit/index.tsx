@@ -7,9 +7,9 @@ const MarketsEdit = (): JSX.Element => {
   const router = useRouter();
   if (typeof router.query.id !== "string") return <></>;
 
-  const { data } = useQueryFetchUsedItem(router.query.id);
+  const { data, client } = useQueryFetchUsedItem(router.query.id);
 
-  return <MarketNew isEdit={true} data={data} />;
+  return <MarketNew isEdit={true} data={data} client={client} />;
 };
 
 export default withAuth(MarketsEdit);

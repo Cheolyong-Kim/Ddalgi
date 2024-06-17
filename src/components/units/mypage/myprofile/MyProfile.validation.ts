@@ -9,6 +9,6 @@ export const schema = yup.object({
   newPasswordCheck: yup
     .string()
     .min(8, "새 비밀번호를 확인해주세요.")
-    .oneOf([yup.ref("newPassword")])
+    .oneOf([yup.ref("newPassword")], "새 비밀번호를 확인해주세요.")
     .required("새 비밀번호를 확인해주세요."),
 });

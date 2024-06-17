@@ -16,6 +16,7 @@ import { useState } from "react";
 import { UploadImageForm } from "../../../commons/uploadImage";
 import type { IUpdateBoardInput } from "../../../../commons/types/generated/types";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
+import { FETCH_BOARD, FETCH_BOARDS } from "../../../../commons/queries";
 
 const BoardsNew = (props: IBoardsNewProps): JSX.Element => {
   const [accessToken] = useRecoilState(accessTokenState);
@@ -48,6 +49,11 @@ const BoardsNew = (props: IBoardsNewProps): JSX.Element => {
             images,
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARDS,
+          },
+        ],
       });
 
       void router.push(`/boards/${result.data?.createBoard._id}`);
@@ -74,6 +80,14 @@ const BoardsNew = (props: IBoardsNewProps): JSX.Element => {
           password: data.password,
           boardId: router.query.id,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD,
+            variables: {
+              boardId: router.query.id,
+            },
+          },
+        ],
       });
 
       void router.push(`/boards/${result.data?.updateBoard._id}`);
@@ -139,7 +153,7 @@ const BoardsNew = (props: IBoardsNewProps): JSX.Element => {
           ></BN.BasicInput>
         </BN.YoutubeInputWrap>
         <UploadImageForm
-          prevImages={props.data?.fetchBoard.images ?? [""]}
+          prevImages={props.data?.fetchBoard.images}
           images={images}
           setImages={setImages}
         />

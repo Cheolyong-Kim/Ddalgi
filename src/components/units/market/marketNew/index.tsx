@@ -21,6 +21,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./MarketNew.validation";
 import PostCode from "../../../commons/postcodeButton";
 import { Modal } from "antd";
+import { FETCH_USEDITEMS } from "../../../../commons/queries";
+import * as _ from "lodash";
 
 const MarketNew = (props: IMarketNewProps): JSX.Element => {
   const { register, formState, handleSubmit, setValue, trigger, getValues } =
@@ -72,6 +74,14 @@ const MarketNew = (props: IMarketNewProps): JSX.Element => {
             images,
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_USEDITEMS,
+            variables: {
+              isSoldout: false,
+            },
+          },
+        ],
       });
 
       void router.push(`/markets/${result.data?.createUseditem._id}`);
@@ -90,10 +100,12 @@ const MarketNew = (props: IMarketNewProps): JSX.Element => {
     if (data.tags) updateUseditemInput.tags = data.tags.split(",");
     if (images.length !== 0) updateUseditemInput.images = images;
     if (address) useditemAddress.address = address;
-    if (data.addressDetail) useditemAddress.addressDetail = address;
-    if (useditemAddress) updateUseditemInput.useditemAddress = useditemAddress;
+    if (data.addressDetail) useditemAddress.addressDetail = data.addressDetail;
+    if (!_.isEmpty(useditemAddress))
+      updateUseditemInput.useditemAddress = useditemAddress;
 
     try {
+      await props.client?.clearStore();
       if (typeof router.query.id !== "string") return;
       await updateUseditem({
         variables: {

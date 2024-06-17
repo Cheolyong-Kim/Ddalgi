@@ -8,7 +8,7 @@ import {
   useMutationToggleUseditemPick,
 } from "../../../../commons/hooks/useMutation";
 import { useRouter } from "next/router";
-import { FETCH_USEDITEM } from "../../../../commons/queries";
+import { FETCH_USEDITEM, FETCH_USEDITEMS } from "../../../../commons/queries";
 import CustomCarousel from "../../../commons/carousel";
 import {
   useQueryFetchUsedItem,
@@ -39,9 +39,18 @@ const MarketDetail = (): JSX.Element => {
         variables: {
           useditemId: router.query.id,
         },
+        refetchQueries: [
+          {
+            query: FETCH_USEDITEMS,
+            variables: {
+              isSoldout: false,
+            },
+          },
+        ],
       });
 
-      void router.push("/markets");
+      alert("게시글이 삭제되었습니다.");
+      await router.push("/markets");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -66,17 +75,29 @@ const MarketDetail = (): JSX.Element => {
   };
 
   const onClickBuyButton = async (): Promise<void> => {
-    try {
-      await createPointTransactionOfBuyingAndSelling({
-        variables: {
-          useritemId: router.query.id ?? "",
-        },
-      });
+    if (typeof router.query.id !== "string") return;
 
-      void router.push("/mypage/mypoint");
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
-    }
+    await createPointTransactionOfBuyingAndSelling({
+      variables: {
+        useritemId: router.query.id,
+      },
+      refetchQueries: [
+        {
+          query: FETCH_USEDITEMS,
+          variables: {
+            isSoldout: false,
+          },
+        },
+        {
+          query: FETCH_USEDITEMS,
+          variables: {
+            isSoldout: true,
+          },
+        },
+      ],
+    });
+
+    void router.push("/mypage/mypoint");
   };
 
   return (

@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 
 const NoticeNew = (props: INoticeNewProps): JSX.Element => {
   const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(schema),
+    resolver: props.isEdit ? undefined : yupResolver(schema),
     mode: "onSubmit",
   });
   const [images, setImages] = useState<string[]>([]);
