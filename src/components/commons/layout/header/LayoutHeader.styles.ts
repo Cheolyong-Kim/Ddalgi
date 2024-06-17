@@ -2,6 +2,10 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import type { IHeaderProfileNavProps } from "./LayoutHeader.types";
 
+interface INavMenuProps {
+  isSelected: boolean;
+}
+
 export const flexRow = css`
   display: flex;
   flex-direction: row;
@@ -69,6 +73,9 @@ export const NavLi = styled.li`
 `;
 
 export const NavLink = styled.a`
+  text-decoration: none;
+  font-weight: ${(props: INavMenuProps) => (props.isSelected ? "bold" : "400")};
+  color: ${(props) => (props.isSelected ? "#fe7488" : "#404040")};
   cursor: pointer;
 `;
 

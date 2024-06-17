@@ -1,9 +1,9 @@
 import { useRecoilState } from "recoil";
 import * as H from "./LayoutHeader.styles";
-import { accessTokenState } from "../../../../commons/stores";
+import { accessTokenState, currentPageState } from "../../../../commons/stores";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import { useQueryFetchUserLoggedIn } from "../../../../commons/hooks/useQuery";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useMutationLogOutUser } from "../../../../commons/hooks/useMutation";
 import { useRouter } from "next/router";
@@ -15,9 +15,9 @@ const NAVIGATION_MENUS = [
 ];
 
 const LayoutHeader = (): JSX.Element => {
-  const [selectedMenu, setSelectedMenu] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
 
   const router = useRouter();
 
@@ -34,6 +34,10 @@ const LayoutHeader = (): JSX.Element => {
     void router.push("/login");
   };
 
+  useEffect(() => {
+    setCurrentPage(router.pathname);
+  }, [router.pathname]);
+
   return (
     <H.Header>
       <H.ContentsWrap>
@@ -45,18 +49,11 @@ const LayoutHeader = (): JSX.Element => {
             <H.NavUl>
               {NAVIGATION_MENUS.map((menu) => (
                 <H.NavLi key={menu.page}>
-                  <H.NavLink
-                    onClick={() => {
-                      onClickMoveToPage(menu.page)();
-                      setSelectedMenu(menu.name);
-                    }}
-                    style={{
-                      color: selectedMenu === menu.name ? "#fe7488" : "#404040",
-                      fontWeight: selectedMenu === menu.name ? "bold" : "400",
-                    }}
-                  >
-                    {menu.name}
-                  </H.NavLink>
+                  <Link href={menu.page} passHref>
+                    <H.NavLink isSelected={currentPage === menu.page}>
+                      {menu.name}
+                    </H.NavLink>
+                  </Link>
                 </H.NavLi>
               ))}
             </H.NavUl>
