@@ -50,7 +50,7 @@ const LayoutHeader = (): JSX.Element => {
               {NAVIGATION_MENUS.map((menu) => (
                 <H.NavLi key={menu.page}>
                   <Link href={menu.page} passHref>
-                    <H.NavLink isSelected={currentPage === menu.page}>
+                    <H.NavLink isSelected={currentPage.includes(menu.page)}>
                       {menu.name}
                     </H.NavLink>
                   </Link>

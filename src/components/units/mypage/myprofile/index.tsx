@@ -3,8 +3,13 @@ import MyPageHeader from "../header";
 import * as MP from "./MyProfile.styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./MyProfile.validation";
-import { useMutationResetUserPassword } from "../../../../commons/hooks/useMutation";
+import {
+  useMutationLogOutUser,
+  useMutationResetUserPassword,
+} from "../../../../commons/hooks/useMutation";
 import { useRouter } from "next/router";
+import { accessTokenState } from "../../../../commons/stores";
+import { useRecoilState } from "recoil";
 
 interface IResetPasswordData {
   oldPassword: string;
@@ -18,7 +23,9 @@ const MyProfile = (): JSX.Element => {
     mode: "onSubmit",
   });
 
+  const [, setAccessToken] = useRecoilState(accessTokenState);
   const [resetUserPassword] = useMutationResetUserPassword();
+  const [logOutUser] = useMutationLogOutUser();
 
   const onClickSubmit = async (data: IResetPasswordData): Promise<void> => {
     try {
@@ -29,6 +36,8 @@ const MyProfile = (): JSX.Element => {
       });
 
       alert("비밀번호가 변경되었습니다");
+      setAccessToken("");
+      void logOutUser();
       void router.push("/login");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
