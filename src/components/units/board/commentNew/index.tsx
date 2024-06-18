@@ -7,7 +7,6 @@ import { useQueryFetchUserLoggedIn } from "../../../../commons/hooks/useQuery";
 import * as CN from "./CommentNew.styles";
 import type { ICommentData, ICommentProps } from "./CommentNew.types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import { schema } from "./CommentNew.validation";
 import { useRouter } from "next/router";
 import { FETCH_BOARD_COMMENT } from "../../../../commons/queries";
@@ -29,7 +28,6 @@ const Comment = (props: ICommentProps): JSX.Element => {
   const { data: userData } = useQueryFetchUserLoggedIn();
   const [createBoardComment] = useMutationCreateBoardComment();
   const [updateBoardComment] = useMutationUpdateBoardComment();
-  const { onClickMoveToPage } = useMoveToPage();
 
   const onClickSubmit = async (inputData: ICommentData): Promise<void> => {
     if (typeof router.query.id !== "string") return;
@@ -144,9 +142,9 @@ const Comment = (props: ICommentProps): JSX.Element => {
             {props.isEdit ? (
               <CN.CancleBtn
                 type="button"
-                onClick={onClickMoveToPage(
-                  `/boards/${router.query.id as string}`,
-                )}
+                onClick={() => {
+                  props.setIsEdit?.(false);
+                }}
               >
                 취소
               </CN.CancleBtn>
