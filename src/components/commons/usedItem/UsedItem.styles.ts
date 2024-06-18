@@ -27,6 +27,7 @@ export const ItemImg = styled.img`
   height: 250px;
   background-color: black;
   margin-bottom: 20px;
+  border: 1px solid #bdbdbd;
   border-radius: 8px;
   cursor: pointer;
 `;
