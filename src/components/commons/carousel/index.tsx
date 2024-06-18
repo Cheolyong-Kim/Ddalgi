@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import * as C from "./Carousel.styles";
+import * as _ from "lodash";
 
 interface CarouselProps {
   images: string[];
@@ -21,22 +22,19 @@ const CustomCarousel = (props: CarouselProps): JSX.Element => {
     }
   };
 
-  return (
+  return !_.isEmpty(newImages) ? (
     <C.CarouselWrap>
       <C.CarouselButton
         onClick={onClickCarouselButton("prev")}
         isRight={false}
       />
       <C.CustomCarousel dots={false} ref={slider}>
-        {newImages.map(
-          (el, index) =>
-            el && (
-              <C.ItemImages
-                key={index}
-                src={`https://storage.googleapis.com/${el}`}
-              />
-            ),
-        )}
+        {newImages.map((el, index) => (
+          <C.ItemImages
+            key={index}
+            src={`https://storage.googleapis.com/${el}`}
+          />
+        ))}
       </C.CustomCarousel>
       <C.ImagesNum>
         {currentImageNum < 0
@@ -49,6 +47,8 @@ const CustomCarousel = (props: CarouselProps): JSX.Element => {
         isRight={true}
       />
     </C.CarouselWrap>
+  ) : (
+    <></>
   );
 };
 
