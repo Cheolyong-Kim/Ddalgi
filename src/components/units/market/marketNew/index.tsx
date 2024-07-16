@@ -1,4 +1,3 @@
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import KaKaoMap from "../../../commons/kakaoMap";
 import { UploadImageForm } from "../../../commons/uploadImage";
@@ -23,6 +22,9 @@ import PostCode from "../../../commons/postcodeButton";
 import { Modal } from "antd";
 import { FETCH_USEDITEMS } from "../../../../commons/queries";
 import * as _ from "lodash";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(async() => await import("react-quill"), {ssr: false});  // ReactQuill을 document가 정의 된 후에 사용하도록 dynamic import 사용
 
 const MarketNew = (props: IMarketNewProps): JSX.Element => {
   const { register, formState, handleSubmit, setValue, trigger, getValues } =

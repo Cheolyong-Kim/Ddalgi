@@ -8,7 +8,7 @@ interface CarouselProps {
 
 const CustomCarousel = (props: CarouselProps): JSX.Element => {
   const [currentImageNum, setCurrentImageNum] = useState(0);
-  const slider = useRef(null);
+  const slider = useRef<any>(null); // prev, next 메소드 ts에러 해결을 위해 any타입 설정
 
   const newImages = props.images?.filter((el) => el !== "");
 

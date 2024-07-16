@@ -16,7 +16,7 @@ const MarketCommentList = (props: CommentListProps): JSX.Element => {
       },
       updateQuery: (
         prev: Pick<IQuery, "fetchUseditemQuestions">,
-        { fetchMoreResult }: Pick<IQuery, "fetchBoardComments">,
+        { fetchMoreResult }: any,  // fetchMoreResult가 Pick<IQuery, "fetchUseditemQuestions">에 존재하지 않아서 발생하는 ts에러 해결을 위해 any타입 선언
       ) => {
         if (fetchMoreResult.fetchUseditemQuestions === undefined) {
           return { fetchUseditemQuestions: [...prev.fetchUseditemQuestions] };

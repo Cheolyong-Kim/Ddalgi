@@ -37,6 +37,8 @@ const MyPageHeader = (props: IMyPageHeaderProps): JSX.Element => {
     event: ChangeEvent<HTMLInputElement>,
   ): Promise<void> => {
     const file = event.target.files?.[0];
+
+    if(typeof file === "undefined") return;   // file이 undefined일때 발생하는 에러 방지(ts)
     const isValid = checkValidationFile(file);
     if (!isValid) return;
 
