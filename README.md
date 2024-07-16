@@ -2,10 +2,6 @@
 
 <img src="https://github.com/Cheolyong-Kim/Ddalgi/assets/71956534/230d77b8-07b5-4127-9c1d-5e6046b0c00c" alt="딸기마켓이미지"/>
 
-<ul>
-    <li>UTL : 추후 추가</li>
-</ul>
-
 </br>
 
 <h1>프로젝트 소개</h1>
