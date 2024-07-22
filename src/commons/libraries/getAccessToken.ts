@@ -11,6 +11,8 @@ const RESTORE_ACCESS_TOKEN = gql`
 
 const getAccessToken = async (): Promise<string | undefined> => {
   try {
+    // ApolloProvider 바깥에 있기 때문에 useQuery() 사용 불가능
+    // graphql-request 라이브러리를 사용해 해결
     const graphqlClient = new GraphQLClient(
       "https://backendonline.codebootcamp.co.kr/graphql",
       { credentials: "include" },
