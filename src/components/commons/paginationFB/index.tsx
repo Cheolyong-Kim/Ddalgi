@@ -1,6 +1,5 @@
 import { usePageFB } from "../../../commons/hooks/usePageFB";
 import * as P from "./PaginationFB.styles";
-import { v4 as uuidv4 } from "uuid";
 import type { IPaginationFBProps } from "./PaginationFB.types";
 
 export const PaginationFB = (props: IPaginationFBProps): JSX.Element => {
@@ -19,7 +18,7 @@ export const PaginationFB = (props: IPaginationFBProps): JSX.Element => {
         (_, index) =>
           index + startPage <= props.lastPage && (
             <P.PaginationSpan
-              key={uuidv4()}
+              key={index + startPage}
               onClick={onClickPage(index + startPage)}
               isActive={index + 1 === props.activatedPage}
             >
