@@ -19,7 +19,7 @@ const Layout = (props: ILayoutProps): JSX.Element => {
       <LayoutHeader />
       <LayoutBanner />
       <Body>{props.children}</Body>
-      <LayoutFooter></LayoutFooter>
+      <LayoutFooter />
     </>
   );
 };
