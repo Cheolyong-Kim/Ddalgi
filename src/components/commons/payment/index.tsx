@@ -1,3 +1,6 @@
+// https://developers.portone.io/docs/ko/sdk/javascript-sdk/readme?v=v1
+// https://developers.portone.io/docs/ko/authpay/guide?v=v1
+
 import type { Dispatch, SetStateAction } from "react";
 import * as P from "./Payment.styles";
 import { useForm } from "react-hook-form";
