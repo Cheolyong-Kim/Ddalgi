@@ -24,9 +24,10 @@ const SearchBar = (props: ISearchBarProps): JSX.Element => {
       searchVariables.endDate = newSearchDate[1];
     }
 
+    // 검색 내용 없이 검색하면 모든 데이터 보여주기
     if (_.isEmpty(searchVariables)) {
       props.setKeyword?.("");
-      props.setIsSearchWord?.(false);
+      props.setIsSearch?.(false);
       void props.refetch({
         search: "",
         startDate: "0000-01-01",
@@ -42,7 +43,7 @@ const SearchBar = (props: ISearchBarProps): JSX.Element => {
     }
 
     props.setKeyword?.(data.searchWord);
-    props.setIsSearchWord?.(true);
+    props.setIsSearch?.(true);
     void props.refetch({ ...searchVariables, page: 1 });
     void props.refetchCount({ ...searchVariables });
   };

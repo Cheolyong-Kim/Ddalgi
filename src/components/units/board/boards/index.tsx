@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 
 const Boards = (): JSX.Element => {
   const [keyword, setKeyword] = useState("");
-  const [isSearchWord, setIsSearchWord] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
 
   const { data, refetch } = useQueryFetchBoards();
 
@@ -31,7 +31,7 @@ const Boards = (): JSX.Element => {
           refetch={refetch}
           refetchCount={refetchBoardsCount}
           setKeyword={setKeyword}
-          setIsSearchWord={setIsSearchWord}
+          setIsSearch={setIsSearch}
         />
       </B.BoardsHeaderWrap>
       <B.BoardsTable>
@@ -45,8 +45,12 @@ const Boards = (): JSX.Element => {
           <B.TableRow key={el._id}>
             <B.TableNum>{index + 1}</B.TableNum>
             <B.TableTitle>
-              <B.TitleLink onClick={() =>{void router.push(`/boards/${el._id}`);}}>
-                {isSearchWord ? (
+              <B.TitleLink
+                onClick={() => {
+                  void router.push(`/boards/${el._id}`);
+                }}
+              >
+                {isSearch ? (
                   <>
                     {el.title
                       .replaceAll(keyword, `@#@#@#${keyword}@#@#@#`)
@@ -74,7 +78,11 @@ const Boards = (): JSX.Element => {
       </B.BoardsTable>
       <B.BoardsFooter>
         <Pagination refetch={refetch} lastPage={lastPage} />
-        <B.CreateBtn onClick={() => {void router.push("/boards/new")}}>
+        <B.CreateBtn
+          onClick={() => {
+            void router.push("/boards/new");
+          }}
+        >
           글쓰기
         </B.CreateBtn>
       </B.BoardsFooter>

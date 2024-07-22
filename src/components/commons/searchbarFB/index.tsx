@@ -24,7 +24,7 @@ const SearchBarFB = (props: ISearchBarFBProps): JSX.Element => {
         el.data().title.includes(searchWord),
       );
 
-      props.setSearchWord(searchWord);
+      props.setKeyword(searchWord);
       props.setDataCopy(newData);
       props.setIsSearch(true);
     }
@@ -49,7 +49,7 @@ const SearchBarFB = (props: ISearchBarFBProps): JSX.Element => {
             new Date(el.data().createdAt) <= new Date(searchDate[1]),
         );
 
-      props.setSearchWord(searchWord);
+      props.setKeyword(searchWord);
       props.setDataCopy(newData);
       props.setIsSearch(true);
     }

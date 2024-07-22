@@ -5,7 +5,7 @@ export interface ISearchBarFBProps {
   data: DocumentData[];
   setDataCopy: Dispatch<SetStateAction<DocumentData[]>>;
   setIsSearch: Dispatch<SetStateAction<boolean>>;
-  setSearchWord: Dispatch<SetStateAction<string>>;
+  setKeyword: Dispatch<SetStateAction<string>>;
 }
 
 export interface ISearchBarData {

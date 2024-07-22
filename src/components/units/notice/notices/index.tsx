@@ -8,7 +8,7 @@ import SearchBarFB from "../../../commons/searchbarFB";
 import { useRouter } from "next/router";
 
 const Notice = (): JSX.Element => {
-  const [searchWord, setSearchWord] = useState("");
+  const [keyword, setKeyword] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [activatedPage, setActivatedPage] = useState(1);
 
@@ -31,7 +31,7 @@ const Notice = (): JSX.Element => {
           data={data}
           setDataCopy={setDataCopy}
           setIsSearch={setIsSearch}
-          setSearchWord={setSearchWord}
+          setKeyword={setKeyword}
         />
       </N.NoticeHeaderWrap>
       <N.NoticeTable>
@@ -54,13 +54,13 @@ const Notice = (): JSX.Element => {
                   <>
                     {doc
                       .data()
-                      .title.replaceAll(searchWord, `@@@${searchWord}@@@`)
+                      .title.replaceAll(keyword, `@@@${keyword}@@@`)
                       .split("@@@")
                       .map((el: string) => (
                         <span
                           key={uuidv4()}
                           style={{
-                            color: el === searchWord ? "#fe7488" : "none",
+                            color: el === keyword ? "#fe7488" : "none",
                           }}
                         >
                           {el}

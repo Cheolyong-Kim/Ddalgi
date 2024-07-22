@@ -22,5 +22,5 @@ export interface ISearchBarProps {
     variables?: Partial<T> | undefined,
   ) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
   setKeyword?: Dispatch<SetStateAction<string>>;
-  setIsSearchWord?: Dispatch<SetStateAction<boolean>>;
+  setIsSearch?: Dispatch<SetStateAction<boolean>>;
 }
