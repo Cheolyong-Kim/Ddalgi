@@ -5,14 +5,12 @@ import TopButton from "../../../commons/top";
 import * as ND from "./NoticeDetail.styles";
 import { deleteDoc, doc, getFirestore } from "firebase/firestore";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
-import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 
 const NoticeDetail = (): JSX.Element => {
   const router = useRouter();
   if (typeof router.query.id !== "string") return <></>;
 
   const { data } = useQueryDoc("Notice", router.query.id);
-  const { onClickMoveToPage } = useMoveToPage();
 
   const db = getFirestore(firebaseApp);
 
@@ -40,7 +38,11 @@ const NoticeDetail = (): JSX.Element => {
               <ND.UtilsWrap>
                 <ND.DateCreated>{getDate(data?.createdAt)}</ND.DateCreated>
                 <ND.Util
-                  onClick={onClickMoveToPage(`/notice/${router.query.id}/edit`)}
+                  onClick={() => {
+                    void router.push(
+                      `/notice/${router.query.id as string}/edit`,
+                    );
+                  }}
                 >
                   수정
                 </ND.Util>

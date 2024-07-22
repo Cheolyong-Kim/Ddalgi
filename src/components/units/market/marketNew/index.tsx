@@ -4,7 +4,6 @@ import { UploadImageForm } from "../../../commons/uploadImage";
 import * as MN from "./MarketNew.styles";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import {
   useMutationCreateUseditem,
   useMutationUpdateUseditem,
@@ -24,7 +23,9 @@ import { FETCH_USEDITEMS } from "../../../../commons/queries";
 import * as _ from "lodash";
 import dynamic from "next/dynamic";
 
-const ReactQuill = dynamic(async() => await import("react-quill"), {ssr: false});  // ReactQuill을 document가 정의 된 후에 사용하도록 dynamic import 사용
+const ReactQuill = dynamic(async () => await import("react-quill"), {
+  ssr: false,
+}); // ReactQuill을 document가 정의 된 후에 사용하도록 dynamic import 사용
 
 const MarketNew = (props: IMarketNewProps): JSX.Element => {
   const { register, formState, handleSubmit, setValue, trigger, getValues } =
@@ -38,7 +39,6 @@ const MarketNew = (props: IMarketNewProps): JSX.Element => {
 
   const [createUseditem] = useMutationCreateUseditem();
   const [updateUseditem] = useMutationUpdateUseditem();
-  const { onClickMoveToPage } = useMoveToPage();
 
   const router = useRouter();
 
@@ -218,7 +218,12 @@ const MarketNew = (props: IMarketNewProps): JSX.Element => {
           <MN.ErrorMessage>{formState.errors.tags?.message}</MN.ErrorMessage>
         </div>
         <MN.ButtonWrap>
-          <MN.CancleBtn type="button" onClick={onClickMoveToPage("/markets")}>
+          <MN.CancleBtn
+            type="button"
+            onClick={() => {
+              void router.push("/markets");
+            }}
+          >
             취소
           </MN.CancleBtn>
           <MN.SubmitBtn type="submit">

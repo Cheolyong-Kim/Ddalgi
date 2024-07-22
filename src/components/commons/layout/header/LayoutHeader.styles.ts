@@ -153,12 +153,15 @@ export const HeaderProfileLiAnchor = styled.a`
 `;
 
 export const HeaderButtonWrap = styled.div`
-  ${flexRow}
+  ${flexRow};
   justify-content: space-between;
   align-items: center;
 `;
 
-export const HeaderButton = styled.button`
+export const HeaderButton = styled.a`
+  ${flexRow};
+  justify-content: center;
+  align-items: center;
   width: 70px;
   height: 30px;
   border: none;
@@ -166,6 +169,8 @@ export const HeaderButton = styled.button`
   background-color: #fe7488;
   font-size: 14px;
   font-weight: bold;
+  text-decoration: none;
+  line-height: -14px;
   color: white;
   cursor: pointer;
 `;

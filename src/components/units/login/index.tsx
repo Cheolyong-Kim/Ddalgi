@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import * as L from "./Login.styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
-import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import { useMutationLoginUser } from "../../../commons/hooks/useMutation";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/stores";
 import type { ILoginData } from "./Login.types";
+import { useRouter } from "next/router";
 
 const Login = (): JSX.Element => {
   const [, setAccessToken] = useRecoilState(accessTokenState);
@@ -14,8 +14,9 @@ const Login = (): JSX.Element => {
     resolver: yupResolver(schema),
     mode: "onSubmit",
   });
-  const { onClickMoveToPage } = useMoveToPage();
   const [loginUser] = useMutationLoginUser();
+
+  const router = useRouter();
 
   const onClickSubmit = async (data: ILoginData): Promise<void> => {
     try {
@@ -32,7 +33,7 @@ const Login = (): JSX.Element => {
         return;
       }
       setAccessToken(accessToken);
-      onClickMoveToPage("/markets")();
+      void router.push("/markets");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -60,7 +61,7 @@ const Login = (): JSX.Element => {
           type="button"
           isLoginBtn={false}
           onClick={() => {
-            onClickMoveToPage("/join")();
+            void router.push("/join");
           }}
         >
           회원가입

@@ -9,7 +9,6 @@ import {
   useMutationDisLikeBoard,
   useMutationLikeBoard,
 } from "../../../../commons/hooks/useMutation";
-import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import { FETCH_BOARD, FETCH_BOARDS } from "../../../../commons/queries";
 
 const BoardsDetail = (): JSX.Element => {
@@ -21,8 +20,6 @@ const BoardsDetail = (): JSX.Element => {
   const [dislikeBoard] = useMutationDisLikeBoard();
 
   const { data } = useQueryFetchBoard(router.query.id);
-
-  const { onClickMoveToPage } = useMoveToPage();
 
   const onClickDelete = async (): Promise<void> => {
     if (typeof data?.fetchBoard._id !== "string") return;
@@ -95,7 +92,11 @@ const BoardsDetail = (): JSX.Element => {
                   {getDate(data?.fetchBoard?.createdAt)}
                 </BD.DateCreated>
                 <BD.Util
-                  onClick={onClickMoveToPage(`/boards/${router.query.id}/edit`)}
+                  onClick={() => {
+                    void router.push(
+                      `/boards/${router.query.id as string}/edit`,
+                    );
+                  }}
                 >
                   수정
                 </BD.Util>

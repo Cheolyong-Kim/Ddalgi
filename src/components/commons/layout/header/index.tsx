@@ -1,7 +1,6 @@
 import { useRecoilState } from "recoil";
 import * as H from "./LayoutHeader.styles";
 import { accessTokenState, currentPageState } from "../../../../commons/stores";
-import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import { useQueryFetchUserLoggedIn } from "../../../../commons/hooks/useQuery";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -23,7 +22,6 @@ const LayoutHeader = (): JSX.Element => {
 
   const { data, client } = useQueryFetchUserLoggedIn();
   const [logOutUser] = useMutationLogOutUser();
-  const { onClickMoveToPage } = useMoveToPage();
 
   const onClickLogout = (): void => {
     setAccessToken("");
@@ -42,9 +40,11 @@ const LayoutHeader = (): JSX.Element => {
     <H.Header>
       <H.ContentsWrap>
         <H.NavWrap>
-          <H.Logo onClick={onClickMoveToPage("/markets")}>
-            <H.LogoImg src="/header/logo.png" />
-          </H.Logo>
+          <Link href="/markets" passHref>
+            <H.Logo>
+              <H.LogoImg src="/header/logo.png" />
+            </H.Logo>
+          </Link>
           <H.Nav>
             <H.NavUl>
               {NAVIGATION_MENUS.map((menu) => (
@@ -110,9 +110,11 @@ const LayoutHeader = (): JSX.Element => {
         ) : (
           <>
             <H.HeaderButtonWrap>
-              <H.HeaderButton onClick={onClickMoveToPage("/login")}>
-                로그인
-              </H.HeaderButton>
+              <Link href="/login" passHref>
+                <H.HeaderButton>
+                  로그인
+                </H.HeaderButton>
+              </Link>
             </H.HeaderButtonWrap>
           </>
         )}

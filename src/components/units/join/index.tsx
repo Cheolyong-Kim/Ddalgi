@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import * as J from "./Join.styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Join.validation";
-import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import { useMutationCreateUser } from "../../../commons/hooks/useMutation";
 import type { IJoinData } from "./Join.types";
+import { useRouter } from "next/router";
 
 const Join = (): JSX.Element => {
   const { register, handleSubmit, formState } = useForm({
@@ -12,8 +12,9 @@ const Join = (): JSX.Element => {
     mode: "onSubmit",
   });
 
-  const { onClickMoveToPage } = useMoveToPage();
   const [createUser] = useMutationCreateUser();
+
+  const router = useRouter();
 
   const onClickJoin = async (data: IJoinData): Promise<void> => {
     try {
@@ -28,7 +29,7 @@ const Join = (): JSX.Element => {
       });
 
       alert("회원가입이 완료되었습니다.");
-      onClickMoveToPage("/login")();
+      void router.push("/login");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

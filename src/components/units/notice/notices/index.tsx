@@ -2,10 +2,10 @@ import * as N from "./notices.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 import { v4 as uuidv4 } from "uuid";
 import { useQueryDocs } from "../../../../commons/hooks/useFirebase";
-import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import { PaginationFB } from "../../../commons/paginationFB";
 import { useState } from "react";
 import SearchBarFB from "../../../commons/searchbarFB";
+import { useRouter } from "next/router";
 
 const Notice = (): JSX.Element => {
   const [searchWord, setSearchWord] = useState("");
@@ -13,7 +13,8 @@ const Notice = (): JSX.Element => {
   const [activatedPage, setActivatedPage] = useState(1);
 
   const { data, dataCopy, setDataCopy } = useQueryDocs("Notice");
-  const { onClickMoveToPage } = useMoveToPage();
+
+  const router = useRouter();
 
   const lastPage = Math.ceil(dataCopy?.length / 10);
 
@@ -44,7 +45,11 @@ const Notice = (): JSX.Element => {
           <N.TableRow key={doc.id}>
             <N.TableNum>{index + 1}</N.TableNum>
             <N.TableTitle>
-              <N.TitleLink onClick={onClickMoveToPage(`/notice/${doc.id}`)}>
+              <N.TitleLink
+                onClick={() => {
+                  void router.push(`/notice/${doc.id}`);
+                }}
+              >
                 {isSearch ? (
                   <>
                     {doc
@@ -78,7 +83,11 @@ const Notice = (): JSX.Element => {
           activatedPage={activatedPage}
           setActivatedPage={setActivatedPage}
         />
-        <N.CreateBtn onClick={onClickMoveToPage(`/notice/new`)}>
+        <N.CreateBtn
+          onClick={() => {
+            void router.push(`/notice/new`);
+          }}
+        >
           글쓰기
         </N.CreateBtn>
       </N.NoticeFooter>

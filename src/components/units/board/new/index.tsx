@@ -15,7 +15,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { UploadImageForm } from "../../../commons/uploadImage";
 import type { IUpdateBoardInput } from "../../../../commons/types/generated/types";
-import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import { FETCH_BOARD, FETCH_BOARDS } from "../../../../commons/queries";
 
 const BoardsNew = (props: IBoardsNewProps): JSX.Element => {
@@ -30,7 +29,6 @@ const BoardsNew = (props: IBoardsNewProps): JSX.Element => {
   const { data: userData } = useQueryFetchUserLoggedIn();
   const [createBoard] = useMutationCreateBoard();
   const [updateBoard] = useMutationUpdateBoard();
-  const { onClickMoveToPage } = useMoveToPage();
 
   const router = useRouter();
 
@@ -183,9 +181,11 @@ const BoardsNew = (props: IBoardsNewProps): JSX.Element => {
         <BN.SubmitBtnWrap>
           <BN.CancleBtn
             type="button"
-            onClick={onClickMoveToPage(
-              props.data ? `/boards/${router.query.id as string}` : "/boards",
-            )}
+            onClick={() => {
+              void router.push(
+                props.data ? `/boards/${router.query.id as string}` : "/boards",
+              );
+            }}
           >
             취소
           </BN.CancleBtn>

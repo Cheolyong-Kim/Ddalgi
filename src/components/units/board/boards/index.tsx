@@ -7,8 +7,8 @@ import {
   useQueryFetchBoards,
   useQueryFetchBoardsCount,
 } from "../../../../commons/hooks/useQuery";
-import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const Boards = (): JSX.Element => {
   const [keyword, setKeyword] = useState("");
@@ -19,7 +19,7 @@ const Boards = (): JSX.Element => {
   const { data: dataBoardsCount, refetch: refetchBoardsCount } =
     useQueryFetchBoardsCount();
 
-  const { onClickMoveToPage } = useMoveToPage();
+  const router = useRouter();
 
   const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
 
@@ -45,7 +45,7 @@ const Boards = (): JSX.Element => {
           <B.TableRow key={el._id}>
             <B.TableNum>{index + 1}</B.TableNum>
             <B.TableTitle>
-              <B.TitleLink onClick={onClickMoveToPage(`/boards/${el._id}`)}>
+              <B.TitleLink onClick={() =>{void router.push(`/boards/${el._id}`);}}>
                 {isSearchWord ? (
                   <>
                     {el.title
@@ -74,7 +74,7 @@ const Boards = (): JSX.Element => {
       </B.BoardsTable>
       <B.BoardsFooter>
         <Pagination refetch={refetch} lastPage={lastPage} />
-        <B.CreateBtn onClick={onClickMoveToPage("/boards/new")}>
+        <B.CreateBtn onClick={() => {void router.push("/boards/new")}}>
           글쓰기
         </B.CreateBtn>
       </B.BoardsFooter>
