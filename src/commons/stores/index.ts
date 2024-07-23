@@ -6,11 +6,6 @@ export const accessTokenState = atom({
   default: "",
 });
 
-export const visitedPageState = atom({
-  key: "visitedPageState",
-  default: "",
-});
-
 export const currentPageState = atom({
   key: "currentPageState",
   default: "",
