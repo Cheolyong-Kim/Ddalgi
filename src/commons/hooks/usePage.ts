@@ -7,7 +7,7 @@ interface IUsePageReturn {
   activatedPage: number;
   onClickPrev: () => Promise<void>;
   onClickNext: () => Promise<void>;
-  onClickPage: (id: string) => Promise<void>;
+  onClickPage: (page: string) => Promise<void>;
 }
 
 export const usePage = (
@@ -34,10 +34,10 @@ export const usePage = (
     }
   };
 
-  const onClickPage = async (id: string): Promise<void> => {
-    const currentPage = Number(id);
+  const onClickPage = async (page: string): Promise<void> => {
+    const currentPage = Number(page);
     setActivatedPage(currentPage);
-    await refetch({ page: Number(id) });
+    await refetch({ page: currentPage });
   };
 
   return { startPage, activatedPage, onClickPrev, onClickNext, onClickPage };
