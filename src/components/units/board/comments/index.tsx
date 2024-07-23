@@ -56,7 +56,13 @@ const Comments = (props: ICommentsProps): JSX.Element => {
       ) : (
         <CS.CommentsWrap id={props.data._id}>
           <CS.CommentsContentsWrap>
-            <CS.ProfileImg src="/boards/id/profile.png" />
+            <CS.ProfileImg
+              src={
+                props.data.user?.picture
+                  ? `http://storage.googleapis.com/${props.data.user.picture}`
+                  : "/boards/id/profile.png"
+              }
+            />
             <CS.CommentsDetailWrap>
               <CS.ProfileWrap>
                 <CS.ProfileName>{props.data.writer}</CS.ProfileName>

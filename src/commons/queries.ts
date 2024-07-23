@@ -128,7 +128,9 @@ export const FETCH_BOARD_COMMENT = gql`
       _id
       writer
       contents
-      rating
+      user {
+        picture
+      }
       createdAt
     }
   }
