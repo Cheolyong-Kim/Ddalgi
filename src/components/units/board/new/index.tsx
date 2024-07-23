@@ -155,29 +155,6 @@ const BoardsNew = (props: IBoardsNewProps): JSX.Element => {
           images={images}
           setImages={setImages}
         />
-        <BN.SettingWrap>
-          <BN.InputName>메인 설정</BN.InputName>
-          <BN.CheckBoxWrap>
-            <BN.SettingCheckBox
-              type="checkbox"
-              id="youtube"
-              name="setting"
-              value="유튜브"
-            ></BN.SettingCheckBox>
-            <BN.SettingCheckLabel htmlFor="youtube">
-              유튜브
-            </BN.SettingCheckLabel>
-            <BN.SettingCheckBox
-              type="checkbox"
-              id="upload_img"
-              name="setting"
-              value="사진"
-            ></BN.SettingCheckBox>
-            <BN.SettingCheckLabel htmlFor="upload_img">
-              사진
-            </BN.SettingCheckLabel>
-          </BN.CheckBoxWrap>
-        </BN.SettingWrap>
         <BN.SubmitBtnWrap>
           <BN.CancleBtn
             type="button"

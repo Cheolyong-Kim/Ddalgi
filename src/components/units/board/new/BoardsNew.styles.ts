@@ -132,37 +132,6 @@ export const AttachInput = styled.input`
   display: none;
 `;
 
-export const SettingWrap = styled.div`
-  margin-bottom: 80px;
-`;
-
-export const CheckBoxWrap = styled.div`
-  ${flexRow};
-  justify-content: space-between;
-  width: 15%;
-`;
-
-export const SettingCheckLabel = styled.label`
-  font-size: 16px;
-  font-weight: 500;
-
-  &::before {
-    content: "";
-    box-sizing: border-box;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    border: 1px solid black;
-    border-radius: 50%;
-    vertical-align: -3px;
-  }
-`;
-
-export const SettingCheckBox = styled.input`
-  display: none;
-`;
-
 export const SubmitBtnWrap = styled.div`
   ${flexRow};
   justify-content: right;
